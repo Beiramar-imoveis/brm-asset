@@ -1,0 +1,14 @@
+{
+  "liveServer.settings.root": "/site",
+  "liveServer.settings.port": 5500,
+  "files.autoSave": "afterDelay",
+  "editor.wordWrap": "on",
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "cSpell.language": "en,pt_BR",
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/vendor": true,
+    "**/support.js": true
+  }
+}
