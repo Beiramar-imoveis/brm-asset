@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>BRM Asset — Contato</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'DM Sans';src:url(./assets/40ea351c1d5a4f58ed00dfacc27c9f12.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+*{font-family:'DM Sans',sans-serif}
+body{margin:0;font-family:'DM Sans',sans-serif;background:#001320;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}a:hover{opacity:.85}
+input,select,button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1980px; display: flex; flex-direction: column; font-family: 'DM Sans', sans-serif; color: #001320; background: #FFFFFF">
+
+<section style="height: 460px; box-sizing: border-box; background: #001320; color: #FFFFFF; display: flex; flex-direction: column; padding: 0 80px">
+<header style="height: 96px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #12304F">
+<a href="#" style="display: flex; align-items: center" aria-label="BRM Asset — início">
+<img src="./assets/b9aa13954b6f1b31a604e8f3e4acaa19.png" alt="BRM Asset" style="height: 38px; width: auto; display: block">
+</a>
+<nav style="display: flex; align-items: center; gap: 32px; font-size: 15px; color: #C9D5E8">
+<a href="#">Início</a>
+<a href="#">Sobre</a>
+<a href="#">Time</a>
+<a href="#">Fundos</a>
+<a href="#">Atuação</a>
+<a href="#">Compliance</a>
+<a href="#" style="color: #FFFFFF; font-weight: 600" aria-current="page">Contato</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 20px">
+<span style="font-size: 13px; color: #8FA2C2; letter-spacing: 1px"><strong style="color: #FFFFFF; font-weight: 600">PT</strong> · EN</span>
+<a href="#" style="display: flex; align-items: center; height: 44px; padding: 0 22px; border-radius: 999px; background: {{accent}}; color: #FFFFFF; font-size: 14px; font-weight: 600">Fale conosco</a>
+</div>
+</header>
+<div style="flex-grow: 1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px; align-items: end; padding-bottom: 88px">
+<div style="grid-column: span 7; display: flex; flex-direction: column; gap: 28px">
+<span style="font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #1CA3E0; font-weight: 600">Contato</span>
+<h1 style="margin: 0; font-size: 68px; line-height: 1.04; font-weight: 600; letter-spacing: -2.5px">Vamos conversar.</h1>
+</div>
+<div style="grid-column: 9 / span 4; padding-bottom: 8px">
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #C9D5E8">Investidor, incorporador parceiro ou imprensa — escreva e nosso time retorna em até 2 dias úteis.</p>
+</div>
+</div>
+</section>
+
+<section style="height: 960px; box-sizing: border-box; background: #EEF5FF; padding: 104px 80px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px; align-items: start">
+<div style="grid-column: span 7; display: flex; flex-direction: column; gap: 22px; padding: 44px; border-radius: 24px; background: #FFFFFF; border: 1px solid #D6E0F0">
+<h2 style="margin: 0 0 6px; font-size: 30px; font-weight: 600; letter-spacing: -1px">Envie sua mensagem</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px">
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: #001320"><span>Nome completo<span style="color: #1D63FF" aria-hidden="true"> *</span></span><input type="text" required="" style="height: 52px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C8D6EE; background: #FFFFFF; padding: 0 16px; font-size: 16px; color: #001320"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: #001320"><span>E-mail<span style="color: #1D63FF" aria-hidden="true"> *</span></span><input type="email" required="" style="height: 52px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C8D6EE; background: #FFFFFF; padding: 0 16px; font-size: 16px; color: #001320"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: #001320"><span>Telefone</span><input type="tel" style="height: 52px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C8D6EE; background: #FFFFFF; padding: 0 16px; font-size: 16px; color: #001320"></label>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: #001320"><span>Tipo de contato<span style="color: #1D63FF" aria-hidden="true"> *</span></span><select required="" style="height: 52px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C8D6EE; background: #FFFFFF; padding: 0 16px; font-size: 16px; color: #001320"><option>Investidor</option><option>Cotista</option><option>Incorporador parceiro</option><option>Imprensa</option><option>Outro assunto</option></select></label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: #001320"><span>Mensagem<span style="color: #1D63FF" aria-hidden="true"> *</span></span><textarea required="" placeholder="Conte brevemente o motivo do contato." style="height: 168px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C8D6EE; background: #FFFFFF; padding: 14px 16px; font-size: 16px; font-family: inherit; color: #001320; resize: vertical"></textarea></label>
+<label style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.5; color: #4A5866"><input type="checkbox" required="" style="margin-top: 3px; width: 18px; height: 18px; accent-color: #00458C"><span>Li e concordo com a <a href="#" style="color: #00458C; font-weight: 600; text-decoration: underline">Política de Privacidade</a> e autorizo o uso dos meus dados para retorno deste contato, conforme a LGPD.</span></label>
+<button type="button" style="align-self: flex-start; height: 56px; padding: 0 34px; border-radius: 999px; border: none; background: {{accent}}; color: #FFFFFF; font-size: 16px; font-weight: 600">Enviar mensagem</button>
+</div>
+
+<div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 20px">
+<a href="mailto:ri@brmasset.com.br" style="display: flex; flex-direction: column; gap: 14px; padding: 32px; border-radius: 20px; background: #001320; color: #FFFFFF">
+<span style="color: #1CA3E0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #A9B8D0">Relações com Investidores</span>
+<span style="font-size: 20px; font-weight: 600">ri@brmasset.com.br</span>
+</div>
+</a>
+<div style="display: flex; flex-direction: column; gap: 22px; padding: 32px; border-radius: 20px; background: #FFFFFF; border: 1px solid #D6E0F0">
+<span style="color: #00458C"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></span>
+<div style="display: flex; flex-direction: column; gap: 4px; font-size: 16px; line-height: 1.5; color: #001320">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #00458C">Asa Sul · Sede</span>
+<span>CLS 402, Bloco A, Loja 27</span>
+<span style="color: #4A5866">Asa Sul, Brasília — DF · 70236-510</span>
+</div>
+<div style="height: 1px; background: #D6E0F0"></div>
+<div style="display: flex; flex-direction: column; gap: 4px; font-size: 16px; line-height: 1.5; color: #001320">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #00458C">Florianópolis</span>
+<span>Rua Bocaiúva, 2125</span>
+<span style="color: #4A5866">Centro, Florianópolis — SC · 88015-530</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<a href="https://www.instagram.com/brm.asset" style="height: 56px; border-radius: 14px; background: #FFFFFF; border: 1px solid #D6E0F0; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 15px; font-weight: 600; color: #00458C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>Instagram</a>
+<a href="https://www.linkedin.com/company/brm-investimentos-asset/" style="height: 56px; border-radius: 14px; background: #FFFFFF; border: 1px solid #D6E0F0; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 15px; font-weight: 600; color: #00458C"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg>LinkedIn</a>
+</div>
+</div>
+</section>
+
+<footer style="height: 560px; box-sizing: border-box; background: #001320; color: #FFFFFF; padding: 80px 80px 40px; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 40px">
+<div style="grid-column: span 2; display: flex; flex-direction: column; gap: 20px">
+<img src="./assets/b9aa13954b6f1b31a604e8f3e4acaa19.png" alt="BRM Asset" style="height: 44px; width: auto; display: block; align-self: flex-start">
+<span style="font-size: 14px; color: #A9B8D0">Gestora de investimentos do Grupo Beiramar.</span>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #A9B8D0; line-height: 1.5">
+<span style="font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #FFFFFF; font-weight: 600">Asa Sul <span style="color: #1CA3E0">· Sede</span></span>
+<span>CLS 402, Bloco A, Loja 27</span>
+<span>Asa Sul, Brasília — DF · 70236-510</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #A9B8D0; line-height: 1.5">
+<span style="font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #FFFFFF; font-weight: 600">Florianópolis</span>
+<span>Rua Bocaiúva, 2125</span>
+<span>Centro, Florianópolis — SC · 88015-530</span>
+</div>
+</div>
+<div style="display: flex; gap: 16px; font-size: 14px; font-weight: 500"><a href="https://www.instagram.com/brm.asset">Instagram</a><a href="https://www.linkedin.com/company/brm-investimentos-asset/">LinkedIn</a></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: #C9D5E8">
+<span style="font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #8FA2C2; font-weight: 600">A BRM Asset</span>
+<a href="#">Quem somos</a><a href="#">Equipe</a><a href="#">Governança</a><a href="#">Documentos regulatórios</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: #C9D5E8">
+<span style="font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #8FA2C2; font-weight: 600">Fundos</span>
+<a href="#">BRM Minha Casa Minha Vida</a><a href="#">BRM E</a><a href="#">BRM Renda Imobiliária</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: #C9D5E8">
+<span style="font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #8FA2C2; font-weight: 600">Contato</span>
+<a href="#">Relações com Investidores</a><a href="#">Originação</a><a href="#">Imprensa</a><a href="#">Trabalhe conosco</a>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 24px; border-top: 1px solid #12304F; padding-top: 28px">
+<div style="display: flex; gap: 32px; align-items: flex-start">
+<div style="display: flex; gap: 16px; flex-shrink: 0; align-items: center">
+<img src="./assets/ffcb17f9373071690195f531927a8c31.png" alt="Autorregulação ANBIMA — Gestão de Recursos" style="height: 84px; width: auto; display: block">
+<img src="./assets/ace997f8fde4be4c049b5507b9c4ac77.png" alt="iaas — Operations and Governance Standards" style="height: 64px; width: auto; display: block">
+</div>
+<p style="margin: 0; font-size: 12px; line-height: 1.6; color: #8FA2C2">As informações deste site têm caráter informativo e não constituem oferta ou recomendação de investimento. Leia o regulamento, a lâmina e o prospecto antes de investir. Rentabilidade passada não representa garantia de rentabilidade futura. Fundos de investimento não contam com garantia do administrador, do gestor ou do Fundo Garantidor de Créditos — FGC. [Texto final a validar com Compliance]</p>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #8FA2C2">
+<span>© 2026 BRM Asset Gestão de Recursos Ltda. Todos os direitos reservados.</span>
+<div style="display: flex; gap: 24px"><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a><a href="#">Cookies</a></div>
+</div>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1D63FF","options":["#1D63FF","#1CA3E0","#00458C"]},"$preview":{"width":1440,"height":1980}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#1D63FF' };
+  }
+}
+</script>
+</body>
+</html>
