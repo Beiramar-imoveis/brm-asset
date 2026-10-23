@@ -4,8 +4,109 @@
 (function () {
   var reduce = !document.documentElement.classList.contains('motion');
 
+  // Tradução PT/EN. O HTML é sempre em português; os textos em inglês ficam em
+  // js/i18n-en.js. A escolha fica salva no navegador (vale para todas as páginas)
+  // e um link com ?lang=en abre o site direto em inglês.
+  var I18N = (function () {
+    var dict = window.BRM_I18N_EN || {};
+    var lang = 'pt';
+    var texts = new Map();     // nó de texto -> texto original em português
+    var attrs = new Map();     // elemento -> { atributo: valor original }
+    var title = null, description = null;
+    var ATTRS = ['alt', 'aria-label', 'placeholder', 'title'];
+    var listeners = [];
+
+    function key(str) { return str.replace(/\s+/g, ' ').trim(); }
+    function t(str) { return lang === 'en' && dict[key(str)] ? dict[key(str)] : str; }
+
+    function translateNode(node) {
+      var original = texts.has(node) ? texts.get(node) : node.nodeValue;
+      var k = key(original);
+      if (!dict[k]) return;
+      if (!texts.has(node)) texts.set(node, original);
+      var edges = original.match(/^(\s*)[\s\S]*?(\s*)$/);
+      node.nodeValue = lang === 'en' ? edges[1] + dict[k] + edges[2] : original;
+    }
+
+    function translateAttrs(el) {
+      ATTRS.forEach(function (name) {
+        if (!el.hasAttribute(name)) return;
+        var saved = attrs.get(el) || {};
+        if (!(name in saved)) saved[name] = el.getAttribute(name);
+        attrs.set(el, saved);
+        var original = saved[name];
+        el.setAttribute(name, lang === 'en' && dict[key(original)] ? dict[key(original)] : original);
+      });
+    }
+
+    function apply(next) {
+      lang = next === 'en' ? 'en' : 'pt';
+      var root = document.documentElement;
+      root.lang = lang === 'en' ? 'en' : 'pt-BR';
+      var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode: function (n) {
+          var p = n.parentNode && n.parentNode.nodeName;
+          return p === 'SCRIPT' || p === 'STYLE' ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      while (walker.nextNode()) translateNode(walker.currentNode);
+      document.querySelectorAll('[alt],[aria-label],[placeholder],[title]').forEach(translateAttrs);
+      if (title === null) title = document.title;
+      document.title = t(title);
+      var meta = document.querySelector('meta[name="description"]');
+      if (meta) {
+        if (description === null) description = meta.getAttribute('content');
+        meta.setAttribute('content', t(description));
+      }
+      document.querySelectorAll('[data-lang]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+      });
+      listeners.forEach(function (fn) { fn(lang); });
+      root.classList.remove('i18n-pending');
+    }
+
+    function set(next) {
+      try { localStorage.setItem('brm-lang', next); } catch (e) {}
+      apply(next);
+    }
+
+    function stored() {
+      try { return localStorage.getItem('brm-lang') === 'en' ? 'en' : 'pt'; } catch (e) { return 'pt'; }
+    }
+
+    return {
+      t: t, apply: apply, set: set, stored: stored,
+      lang: function () { return lang; },
+      decimal: function () { return lang === 'en' ? '.' : ','; },
+      onChange: function (fn) { listeners.push(fn); }
+    };
+  })();
+
   document.addEventListener('DOMContentLoaded', function () {
     var header = document.querySelector('.page header');
+
+    // Seletor de idioma: no cabeçalho e, no celular, também dentro do menu
+    var switcher = document.querySelector('.lang-switch');
+    var nav = header && header.querySelector('nav');
+    if (switcher && nav) {
+      var menuSwitch = switcher.cloneNode(true);
+      menuSwitch.classList.add('lang-switch--menu');
+      menuSwitch.removeAttribute('style');
+      nav.appendChild(menuSwitch);
+    }
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-lang]');
+      if (b) I18N.set(b.dataset.lang);
+    });
+    // Separador decimal dos números grandes ("+2,2" em português, "+2.2" em inglês)
+    I18N.onChange(function () {
+      document.querySelectorAll('.page span[style*="font-size: 60px"]').forEach(function (el) {
+        var n = el.firstChild;
+        if (n && n.nodeType === 3) n.nodeValue = n.nodeValue.replace(/(\d)[.,](\d)/, '$1' + I18N.decimal() + '$2');
+      });
+    });
+    if (I18N.stored() === 'en') I18N.apply('en');
+
     var hero = document.querySelector('.page > section.hero');
 
     // Menu do cabeçalho em telas estreitas
@@ -18,7 +119,7 @@
         document.documentElement.classList.toggle('menu-open', open);
         toggle.innerHTML = open ? iconClose : iconOpen;
         toggle.setAttribute('aria-expanded', String(open));
-        toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+        toggle.setAttribute('aria-label', I18N.t(open ? 'Fechar menu' : 'Abrir menu'));
       };
       toggle.addEventListener('click', function () { setMenu(!header.classList.contains('is-open')); });
       document.addEventListener('keydown', function (e) {
@@ -28,6 +129,7 @@
         if (window.innerWidth > 1200 && header.classList.contains('is-open')) setMenu(false);
       });
       window.addEventListener('pageshow', function () { setMenu(false); });
+      I18N.onChange(function () { setMenu(header.classList.contains('is-open')); });
     }
 
     // Cabeçalho fixo e compacto depois do topo da página
@@ -117,14 +219,14 @@
       var m = node.nodeValue.match(/^(\D*?)(\d+(?:,\d+)?)(.*)$/);
       if (!m) return;
       el._count = { node: node, pre: m[1], to: parseFloat(m[2].replace(',', '.')), dec: (m[2].split(',')[1] || '').length, post: m[3] };
-      node.nodeValue = m[1] + (0).toFixed(el._count.dec).replace('.', ',') + m[3];
+      node.nodeValue = m[1] + (0).toFixed(el._count.dec).replace('.', I18N.decimal()) + m[3];
       countIO.observe(el);
     });
     function countUp(el) {
       var c = el._count, t0 = performance.now(), dur = 1300;
       (function step(t) {
         var p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
-        c.node.nodeValue = c.pre + (c.to * e).toFixed(c.dec).replace('.', ',') + c.post;
+        c.node.nodeValue = c.pre + (c.to * e).toFixed(c.dec).replace('.', I18N.decimal()) + c.post;
         if (p < 1) requestAnimationFrame(step);
       })(t0);
     }
