@@ -193,6 +193,16 @@
     }
     document.addEventListener('visibilitychange', function () { root.classList.toggle('is-hidden', document.hidden); });
 
-    show(0);
+    // A primeira foto já vem ativa no HTML, então não haveria transição: tira a
+    // classe e devolve depois que a imagem carregar, para a aproximação lenta
+    // (Ken Burns) acontecer também nela.
+    var first = photos[0];
+    first.style.transition = 'none';
+    first.classList.remove('is-active');
+    void first.offsetWidth;
+    first.style.transition = '';
+    (first.decode ? first.decode() : Promise.resolve()).catch(function () {}).then(function () {
+      requestAnimationFrame(function () { show(0); });
+    });
   }
 })();
