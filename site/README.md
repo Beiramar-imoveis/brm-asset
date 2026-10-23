@@ -59,5 +59,5 @@ cd site && python3 -m http.server
 
 - PDFs dos fundos, notícias, Política de Privacidade, Termos de Uso e Cookies ainda apontam para `#`.
 - O formulário de contato não tem envio configurado (precisa de backend ou serviço de formulários).
-- Foto do Jardins do Cerrado (Atuação) e selos "Fundo: [a definir]" dos empreendimentos.
+- Foto do Jardins do Cerrado (Atuação): o card mantém o selo "Fundo: [a definir]" e o marcador [Foto] até a imagem chegar.
 - O design só tem versões desktop: a adaptação para tablet e celular foi feita no CSS.
