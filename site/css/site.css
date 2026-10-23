@@ -16,6 +16,11 @@
   --blue: #00458C;
   --cyan: #1CA3E0;
   --ice: #EEF5FF;
+  --white: #FFFFFF;
+  /* contornos de botões secundários, conforme o fundo */
+  --line-dark: #2B4A6E;   /* sobre fundo navy */
+  --line-blue: #7FA3D6;   /* sobre fundo azul */
+  --line-light: #C8D6EE;  /* sobre fundo claro */
   --gutter: 80px;
   --content: 1280px;
 }

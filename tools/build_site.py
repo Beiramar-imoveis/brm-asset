@@ -102,7 +102,8 @@ HEAD = """<!doctype html>
 <meta property="og:description" content="{description}">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#001320">
-<link rel="icon" href="assets/b9aa13954b6f1b31a604e8f3e4acaa19.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
 <link rel="preload" href="assets/40ea351c1d5a4f58ed00dfacc27c9f12.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("motion")</script>
@@ -110,6 +111,31 @@ HEAD = """<!doctype html>
 </head>
 <body>
 """
+
+
+# Cores dos botões (pílulas) -> variáveis do site.css, por categoria:
+# principal (fundo --accent), invertido (fundo branco, texto --blue),
+# contorno sobre fundo escuro, sobre fundo azul e sobre fundo claro.
+BUTTON_COLORS = [
+    ("background: {{accent}}", "background: var(--accent)"),
+    ("background: #1D63FF", "background: var(--accent)"),
+    ("background: #00458C", "background: var(--accent)"),
+    ("background: #FFFFFF", "background: var(--white)"),
+    ("color: #FFFFFF", "color: var(--white)"),
+    ("color: #00458C", "color: var(--blue)"),
+    ("border: 1px solid #2B4A6E", "border: 1px solid var(--line-dark)"),
+    ("border: 1px solid #7FA3D6", "border: 1px solid var(--line-blue)"),
+    ("border: 1px solid #C8D6EE", "border: 1px solid var(--line-light)"),
+]
+
+
+def standardize_buttons(body):
+    def repl(m):
+        style = m.group(2)
+        for old, new in BUTTON_COLORS:
+            style = re.sub(re.escape(old) + r"(?=;|$)", new, style)
+        return m.group(1) + style + m.group(3)
+    return re.sub(r'(<(?:a|button)\b[^>]*style=")([^"]*border-radius: 999px[^"]*)(")', repl, body)
 
 
 def link_text(inner):
@@ -148,6 +174,7 @@ def convert(src, page, title, description):
     body = re.sub(r'^<div style="width: 1440px; height: \d+px; ', '<div class="page" style="', body, count=1)
     # a primeira seção (com o cabeçalho) é o hero
     body = body.replace("<section style=", '<section class="hero" style=', 1)
+    body = standardize_buttons(body)
     body = body.replace("{{accent}}", "var(--accent)")
     body = body.replace('src="./assets/', 'src="assets/')
     # botão de menu para telas estreitas
