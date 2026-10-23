@@ -352,6 +352,16 @@ a:hover .card-photo { transform: scale(1.05); }
   transition: background-color .3s var(--ease), border-color .3s var(--ease);
 }
 .slide-thumb:hover { background: rgba(0, 19, 32, .75) !important; border-color: rgba(255, 255, 255, .45) !important; }
+.slide-thumbs { display: grid !important; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.slide-thumb { min-width: 0; }
+.slide-thumb[style] { padding: 10px !important; justify-content: center; }
+.slide-thumb > span:first-child { line-height: 1.2; }
+.slide-thumb > span + span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 1200px) {
+  .slide-thumb > span + span { display: none; }
+  .slide-thumb[style] { text-align: center; }
+}
+.slide-thumb.is-active { background: rgba(255, 255, 255, .16) !important; border-color: rgba(255, 255, 255, .75) !important; }
 .slide-prev, .slide-next { cursor: pointer; transition: transform .3s var(--ease); }
 .slide-prev:hover, .slide-next:hover { transform: scale(1.06); }
 
