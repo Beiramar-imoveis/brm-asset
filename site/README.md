@@ -22,6 +22,18 @@ Site estático gerado a partir dos artboards do design (`*.dc.html` na raiz e na
    os links de navegação, rodapé e CTAs são ligados automaticamente.
 3. Ajustes de base, cor de destaque (`--accent`) e adaptação a tablet/celular ficam em `site/css/site.css`.
 
+## Animações
+
+Ficam em `site/js/site.js` e no fim de `site/css/site.css`, no mesmo vocabulário do site do Grupo Beiramar:
+entrada em sequência no topo, revelação ao rolar, cabeçalho compacto fixo, barra de progresso, contagem dos
+números, hover em botões, cartões e fotos, e transição entre páginas. Quem configura o sistema para
+"reduzir movimento" vê o site sem animações.
+
+## Bloqueio do Google (versão de homologação)
+
+Todas as páginas têm `<meta name="robots" content="noindex, nofollow">` (definido em `tools/build_site.py`).
+No lançamento oficial: remover essa linha do script, rodar o build e apagar `site/robots.txt`.
+
 ## Visualizar
 
 ```sh
