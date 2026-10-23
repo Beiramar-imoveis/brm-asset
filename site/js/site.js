@@ -11,11 +11,23 @@
     // Menu do cabeçalho em telas estreitas
     var toggle = document.querySelector('.nav-toggle');
     if (toggle && header) {
-      toggle.addEventListener('click', function () {
-        var open = header.classList.toggle('is-open');
+      var iconOpen = toggle.innerHTML;
+      var iconClose = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>';
+      var setMenu = function (open) {
+        header.classList.toggle('is-open', open);
+        document.documentElement.classList.toggle('menu-open', open);
+        toggle.innerHTML = open ? iconClose : iconOpen;
         toggle.setAttribute('aria-expanded', String(open));
         toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+      };
+      toggle.addEventListener('click', function () { setMenu(!header.classList.contains('is-open')); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && header.classList.contains('is-open')) { setMenu(false); toggle.focus(); }
       });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 1200 && header.classList.contains('is-open')) setMenu(false);
+      });
+      window.addEventListener('pageshow', function () { setMenu(false); });
     }
 
     // Cabeçalho fixo e compacto depois do topo da página

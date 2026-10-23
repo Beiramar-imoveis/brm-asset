@@ -26,7 +26,7 @@
 }
 
 * { font-family: 'DM Sans', sans-serif; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0; font-family: 'DM Sans', sans-serif; background: var(--navy); -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 a:hover { opacity: .85; }
@@ -73,26 +73,25 @@ img { max-width: 100%; }
   .page > section.hero > div { padding-top: 56px; }
 
   header { position: relative; flex-wrap: nowrap !important; gap: 12px !important; }
-  header.is-open { flex-wrap: wrap !important; }
   header > nav { display: none !important; }
   header > div { order: 2; margin-left: auto; flex-wrap: nowrap !important; }
   .nav-toggle { display: inline-flex; order: 3; flex-shrink: 0; }
-  header.is-open > nav {
-    display: flex !important;
-    order: 10;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start !important;
-    gap: 4px !important;
-    padding: 12px 0 20px;
-  }
-  header.is-open > nav a { padding: 10px 0; font-size: 17px; }
 
   .page [style*="justify-content: space-between"] { flex-wrap: wrap; gap: 24px; }
   .page [style*="repeat(5, minmax(0, 1fr))"],
   .page [style*="repeat(4, minmax(0, 1fr))"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; row-gap: 40px !important; }
   .page [style*="repeat(12, minmax(0, 1fr))"] > * { grid-column: span 12 !important; }
   .page [style*="width: "]:not(svg):not(img):not(span) { max-width: 100%; }
+  .page p[style*="width: "] { width: auto !important; }
+  /* cards de altura fixa crescem com o conteúdo quando a coluna estreita */
+  .page a[style*="border-radius: 20px"][style*="height: "]:not(.photo-card) { height: auto !important; min-height: 220px; }
+}
+
+/* Tablet: o topo da Home empilha texto e carrossel */
+@media (max-width: 1024px) {
+  .page > section.hero [style*="repeat(2, minmax(0, 1fr))"] { grid-template-columns: minmax(0, 1fr) !important; row-gap: 48px !important; }
+  .page > section.hero .hero-carousel.hero-carousel { min-height: 520px; }
+  .page [style*="display: flex"]:not([style*="flex-direction: column"]):not(button):not(a) { flex-wrap: wrap; }
 }
 
 /* Celular */
@@ -101,7 +100,6 @@ img { max-width: 100%; }
   .page > section:not(.hero) { padding-top: 64px !important; padding-bottom: 64px !important; }
   .page > footer { padding-top: 56px !important; }
   .page header[style] { height: 76px !important; }
-  .page header.is-open[style] { height: auto !important; }
   .page header img { height: 30px !important; }
   .page header > div > span { display: none; }
   .page header > div > a[style] { height: 40px !important; padding: 0 16px !important; font-size: 13px !important; white-space: nowrap; }
@@ -266,10 +264,80 @@ header nav a[aria-current="page"]::after { transform: scaleX(1); }
   box-shadow: 0 0 0 4px rgba(29, 99, 255, .14);
 }
 
+/* ---------- Menu do celular e tablet ---------- */
+
+@keyframes menu-in { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+
 @media (max-width: 1200px) {
-  .page header.is-stuck.is-open[style] { height: auto !important; padding-bottom: 8px; }
+  :root { --header-h: 72px; }
+  html.menu-open, html.menu-open body { overflow: hidden; }
+  .header-spacer:has(+ header.is-open) { display: block; }
+
+  /* Cabeçalho fixo no topo, com altura própria, enquanto o menu está aberto */
+  .page header.is-open[style] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 70;
+    height: var(--header-h) !important;
+    padding: 0 var(--gutter);
+    background: var(--navy);
+    border-bottom: 1px solid rgba(255, 255, 255, .1) !important;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    animation: none;
+  }
+  .page header.is-open img { height: 30px !important; }
+
+  /* Painel claro abaixo do cabeçalho: contraste nítido com o site */
+  header.is-open > nav[style] {
+    display: flex !important;
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 0 !important;
+    padding: 8px var(--gutter) 40px;
+    background: var(--white);
+    color: var(--navy) !important;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    animation: menu-in .35s var(--ease-out) both;
+  }
+  header.is-open > nav a[href] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #D6E0F0;
+    color: var(--navy) !important;
+    font-size: 20px;
+    font-weight: 500 !important;
+  }
+  header.is-open > nav a[aria-current="page"] { color: var(--accent) !important; font-weight: 600 !important; }
+  /* o sublinhado do desktop vira uma seta discreta */
+  header.is-open > nav a::after {
+    position: static;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    background: none;
+    opacity: .45;
+    transform: rotate(45deg);
+    transition: none;
+  }
+  header.is-open > nav a[aria-current="page"]::after { opacity: 1; transform: rotate(45deg); }
+  header.is-open .nav-toggle { background: var(--white); color: var(--navy); border-color: var(--white); }
 }
 @media (max-width: 760px) {
+  :root { --header-h: 64px; }
+  .page header.is-open img { height: 28px !important; }
   .page header.is-stuck[style] { height: 64px !important; }
   .page header.is-stuck img { height: 28px !important; }
 }
