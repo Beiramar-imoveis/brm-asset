@@ -363,6 +363,34 @@ header nav a[aria-current="page"]::after { transform: scaleX(1); }
 .photo-slot::after { background: linear-gradient(180deg, rgba(0, 19, 32, .4) 0%, rgba(0, 19, 32, 0) 40%); }
 a:hover .card-photo { transform: scale(1.05); }
 
+/* ---------- Seção com foto de fundo ("Do Planalto Central a Nova York") ---------- */
+
+.bg-section { position: relative; overflow: hidden; isolation: isolate; }
+.bg-section > :not(.section-bg) { position: relative; z-index: 2; }
+.section-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 62%;
+}
+/* camada no mesmo azul-escuro da seção (#001320): mais densa atrás do título */
+.bg-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0, 19, 32, .86) 0%, rgba(0, 19, 32, .7) 38%, rgba(0, 19, 32, .56) 100%),
+    linear-gradient(0deg, rgba(0, 19, 32, .35) 0%, rgba(0, 19, 32, 0) 45%);
+}
+@media (max-width: 760px) {
+  .bg-section::before { background: rgba(0, 19, 32, .8); }
+}
+
 /* ---------- Carrossel da Home ---------- */
 
 .hero-carousel { isolation: isolate; }

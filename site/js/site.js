@@ -84,7 +84,7 @@
       '.page > section:not(.hero) p',
       '.page > section:not(.hero) [style*="display: grid"] > *',
       '.page > section:not(.hero) span[style*="text-transform: uppercase"]',
-      '.page > section:not(.hero) img',
+      '.page > section:not(.hero) img:not(.section-bg)',
       '.page > footer [style*="display: grid"] > *',
       '.page > footer [style*="border-top"]'
     ].join(',');
