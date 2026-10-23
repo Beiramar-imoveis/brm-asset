@@ -274,6 +274,96 @@ header nav a[aria-current="page"]::after { transform: scaleX(1); }
   .page header.is-stuck img { height: 28px !important; }
 }
 
+/* ---------- Fotos dos empreendimentos ---------- */
+
+.photo-card,
+.photo-slot { position: relative; overflow: hidden; isolation: isolate; }
+.photo-card > :not(.card-photo),
+.photo-slot > :not(.card-photo) { position: relative; z-index: 2; }
+.card-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease);
+}
+.photo-card::after,
+.photo-slot::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.photo-card::after { background: linear-gradient(180deg, rgba(0, 19, 32, .45) 0%, rgba(0, 19, 32, 0) 32%, rgba(0, 19, 32, .1) 55%, rgba(0, 19, 32, .88) 100%); }
+.photo-slot::after { background: linear-gradient(180deg, rgba(0, 19, 32, .4) 0%, rgba(0, 19, 32, 0) 40%); }
+a:hover .card-photo { transform: scale(1.05); }
+
+/* ---------- Carrossel da Home ---------- */
+
+.hero-carousel { isolation: isolate; }
+.hero-carousel > :not(.slide-photo) { position: relative; z-index: 2; }
+.hero-carousel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 19, 32, .5) 0%, rgba(0, 19, 32, 0) 26%, rgba(0, 19, 32, .15) 45%, rgba(0, 19, 32, .6) 70%, rgba(0, 19, 32, .92) 100%);
+}
+.slide-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
+}
+/* aproximação lenta durante a exibição (efeito Ken Burns) */
+.slide-photo.is-active { opacity: 1; transform: scale(1.09); transition: opacity 1.2s var(--ease), transform 8s linear; }
+
+.slide-name, .slide-place, .slide-count { display: inline-block; transition: opacity .28s ease, transform .28s ease; }
+.slide-name.is-changing, .slide-place.is-changing, .slide-count.is-changing { opacity: 0; transform: translateY(6px); }
+
+.slide-dot { padding: 8px 0; border: 0; background: none; cursor: pointer; }
+.slide-dot span {
+  position: relative;
+  display: block;
+  width: 6px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .4);
+  transition: width .5s var(--ease);
+}
+.slide-dot.is-active span { width: 28px; }
+.slide-dot span::after { content: ""; position: absolute; inset: 0; background: var(--white); transform: scaleX(0); transform-origin: 0 50%; }
+.slide-dot.is-active span::after { animation: dot-fill 7s linear forwards; }
+@keyframes dot-fill { to { transform: scaleX(1); } }
+.hero-carousel:hover .slide-dot.is-active span::after,
+.hero-carousel:focus-within .slide-dot.is-active span::after,
+.hero-carousel.is-offscreen .slide-dot.is-active span::after,
+.hero-carousel.is-hidden .slide-dot.is-active span::after { animation-play-state: paused; }
+
+.slide-thumb {
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color .3s var(--ease), border-color .3s var(--ease);
+}
+.slide-thumb:hover { background: rgba(0, 19, 32, .75) !important; border-color: rgba(255, 255, 255, .45) !important; }
+.slide-prev, .slide-next { cursor: pointer; transition: transform .3s var(--ease); }
+.slide-prev:hover, .slide-next:hover { transform: scale(1.06); }
+
+@media (max-width: 760px) {
+  .page .photo-card.photo-card { min-height: 240px; }
+  .page .photo-slot.photo-slot[style] { height: 240px !important; }
+  .page .hero-carousel.hero-carousel { min-height: 420px; }
+  .slide-thumbs { display: none !important; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
+  .slide-photo.is-active { transform: none; }
+  .slide-dot.is-active span { background: var(--white); }
 }

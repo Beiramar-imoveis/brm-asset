@@ -44,6 +44,10 @@
       onScroll();
     }
 
+    // Carrossel de ativos da Home
+    var carousel = document.querySelector('.hero-carousel');
+    if (carousel) initCarousel(carousel);
+
     if (reduce || !('IntersectionObserver' in window)) return;
 
     // Entrada do hero, em sequência
@@ -126,4 +130,69 @@
     });
     window.addEventListener('pageshow', function () { document.body.classList.remove('is-leaving'); });
   });
+
+  // Carrossel: troca a cada 7 s. O tempo é a animação de preenchimento do ponto
+  // ativo, então pausar a animação (hover, foco, fora da tela) pausa o carrossel,
+  // e quem prefere menos movimento navega só pelas setas, pontos e miniaturas.
+  function initCarousel(root) {
+    var photos = Array.prototype.slice.call(root.querySelectorAll('.slide-photo'));
+    var dots = Array.prototype.slice.call(root.querySelectorAll('.slide-dot'));
+    var thumbs = Array.prototype.slice.call(root.querySelectorAll('.slide-thumb'));
+    var count = root.querySelector('.slide-count');
+    var name = root.querySelector('.slide-name');
+    var place = root.querySelector('.slide-place');
+    var total = photos.length, current = 0;
+    if (total < 2) return;
+
+    function show(index) {
+      current = (index + total) % total;
+      var photo = photos[current];
+      photos.forEach(function (p, i) { p.classList.toggle('is-active', i === current); });
+      dots.forEach(function (d, i) {
+        d.classList.toggle('is-active', i === current);
+        d.setAttribute('aria-current', i === current ? 'true' : 'false');
+      });
+      [name, place, count].forEach(function (el) { el.classList.add('is-changing'); });
+      setTimeout(function () {
+        name.textContent = photo.dataset.name;
+        place.textContent = photo.dataset.place;
+        count.textContent = (current + 1 < 10 ? '0' : '') + (current + 1);
+        [name, place, count].forEach(function (el) { el.classList.remove('is-changing'); });
+      }, 280);
+      thumbs.forEach(function (t, k) {
+        var i = (current + 1 + k) % total;
+        t.dataset.index = i;
+        t.firstChild.textContent = photos[i].dataset.name;
+        t.setAttribute('aria-label', 'Ver ' + photos[i].dataset.name);
+      });
+    }
+
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () { show(i); });
+      d.addEventListener('animationend', function () { if (i === current) show(current + 1); });
+    });
+    thumbs.forEach(function (t) { t.addEventListener('click', function () { show(+t.dataset.index); }); });
+    root.querySelector('.slide-prev').addEventListener('click', function () { show(current - 1); });
+    root.querySelector('.slide-next').addEventListener('click', function () { show(current + 1); });
+
+    // Deslizar no celular
+    var startX = null;
+    root.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    root.addEventListener('touchend', function (e) {
+      if (startX === null) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) show(current + (dx < 0 ? 1 : -1));
+      startX = null;
+    });
+
+    // Pausa quando o carrossel sai da tela ou a aba fica em segundo plano
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        root.classList.toggle('is-offscreen', !entries[0].isIntersecting);
+      }, { threshold: 0.25 }).observe(root);
+    }
+    document.addEventListener('visibilitychange', function () { root.classList.toggle('is-hidden', document.hidden); });
+
+    show(0);
+  }
 })();

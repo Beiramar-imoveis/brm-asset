@@ -17,10 +17,25 @@ Site estático gerado a partir dos artboards do design (`*.dc.html` na raiz e na
 
 ## Como atualizar
 
-1. Exporte o artboard alterado do design e substitua o `.dc.html` correspondente no repositório.
-2. Rode `python3 tools/build_site.py` (sem dependências). As páginas em `site/` são regeneradas e
-   os links de navegação, rodapé e CTAs são ligados automaticamente.
-3. Ajustes de base, cor de destaque (`--accent`) e adaptação a tablet/celular ficam em `site/css/site.css`.
+**A pasta `site/` é a fonte oficial do site.** Edite as páginas diretamente aqui (VS Code + Live Server).
+
+⚠️ Não rode mais `tools/build_site.py`: ele recria as páginas a partir dos arquivos do design e apagaria
+as edições feitas direto em `site/` (fotos dos empreendimentos, carrossel e ajustes manuais).
+Ele fica no repositório só como histórico da conversão inicial.
+
+Ajustes de base, cores (`--accent`, `--blue`…) e adaptação a tablet/celular ficam em `site/css/site.css`.
+
+## Fotos dos empreendimentos
+
+Em `site/assets/`, em WebP com até 1600 px (cada uma com 100–350 KB). Para trocar ou incluir uma foto,
+otimize antes de subir (ex.: squoosh.app → WebP, qualidade 80, largura 1600) e mantenha o nome do
+empreendimento no arquivo (`casa-pedra.webp`).
+
+## Carrossel da Home
+
+Troca a cada 7 s, com aproximação lenta da foto. Pausa com o mouse em cima, fora da tela ou com a aba em
+segundo plano; aceita setas, pontos, miniaturas e deslizar no celular. Para mudar o tempo, altere `7s`
+em `.slide-dot.is-active span::after` no `site.css`. Os ativos ficam em `site/index.html` (`slide-photo`).
 
 ## Animações
 
@@ -44,5 +59,5 @@ cd site && python3 -m http.server
 
 - PDFs dos fundos, notícias, Política de Privacidade, Termos de Uso e Cookies ainda apontam para `#`.
 - O formulário de contato não tem envio configurado (precisa de backend ou serviço de formulários).
-- Fotos dos ativos e o carrossel da Home estão como marcadores do design.
+- Foto do Jardins do Cerrado (Atuação) e selos "Fundo: [a definir]" dos empreendimentos.
 - O design só tem versões desktop: a adaptação para tablet e celular foi feita no CSS.
