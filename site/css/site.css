@@ -264,6 +264,25 @@ header nav a[aria-current="page"]::after { transform: scaleX(1); }
   box-shadow: 0 0 0 4px rgba(29, 99, 255, .14);
 }
 
+/* ---------- Seletor de idioma (PT · EN) ---------- */
+
+/* enquanto o inglês é aplicado no carregamento, a página não aparece em português */
+html.i18n-pending body { opacity: 0; animation: show 0s 1.5s forwards; }
+
+.lang-switch button {
+  padding: 8px 2px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  transition: color .3s var(--ease);
+}
+.lang-switch button:hover { color: var(--white); }
+.lang-switch button[aria-pressed="true"] { color: var(--white); font-weight: 600; }
+.lang-switch--menu { display: none; }
+
 /* ---------- Menu do celular e tablet ---------- */
 
 @keyframes menu-in { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
@@ -334,6 +353,18 @@ header nav a[aria-current="page"]::after { transform: scaleX(1); }
   }
   header.is-open > nav a[aria-current="page"]::after { opacity: 1; transform: rotate(45deg); }
   header.is-open .nav-toggle { background: var(--white); color: var(--navy); border-color: var(--white); }
+  header.is-open > nav .lang-switch--menu {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 24px;
+    color: #667482;
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
+  header.is-open > nav .lang-switch--menu button { padding: 10px 8px; }
+  header.is-open > nav .lang-switch--menu button:hover,
+  header.is-open > nav .lang-switch--menu button[aria-pressed="true"] { color: var(--accent); }
 }
 @media (max-width: 760px) {
   :root { --header-h: 64px; }
