@@ -159,11 +159,11 @@
         count.textContent = (current + 1 < 10 ? '0' : '') + (current + 1);
         [name, place, count].forEach(function (el) { el.classList.remove('is-changing'); });
       }, 280);
-      thumbs.forEach(function (t, k) {
-        var i = (current + 1 + k) % total;
-        t.dataset.index = i;
-        t.firstChild.textContent = photos[i].dataset.name;
-        t.setAttribute('aria-label', 'Ver ' + photos[i].dataset.name);
+      // Miniaturas fixas (uma por ativo, sempre na mesma ordem): só a ativa muda
+      thumbs.forEach(function (t) {
+        var active = +t.dataset.index === current;
+        t.classList.toggle('is-active', active);
+        if (active) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current');
       });
     }
 
@@ -201,8 +201,11 @@
     first.classList.remove('is-active');
     void first.offsetWidth;
     first.style.transition = '';
+    // Se o visitante já escolheu outro ativo enquanto a foto carregava, respeita a escolha
     (first.decode ? first.decode() : Promise.resolve()).catch(function () {}).then(function () {
-      requestAnimationFrame(function () { show(0); });
+      requestAnimationFrame(function () {
+        if (!photos.some(function (p) { return p.classList.contains('is-active'); })) show(current);
+      });
     });
   }
 })();

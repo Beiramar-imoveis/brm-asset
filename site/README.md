@@ -34,7 +34,8 @@ empreendimento no arquivo (`casa-pedra.webp`).
 ## Carrossel da Home
 
 Troca a cada 7 s, com aproximação lenta da foto. Pausa com o mouse em cima, fora da tela ou com a aba em
-segundo plano; aceita setas, pontos, miniaturas e deslizar no celular. Para mudar o tempo, altere `7s`
+segundo plano; aceita setas, pontos, miniaturas e deslizar no celular. As miniaturas são fixas (uma por
+ativo, na mesma ordem dos slides, com `data-index`); a do ativo em destaque fica realçada. Para mudar o tempo, altere `7s`
 em `.slide-dot.is-active span::after` no `site.css`. Os ativos ficam em `site/index.html` (`slide-photo`).
 
 ## Animações
