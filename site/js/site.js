@@ -162,6 +162,29 @@
     var carousel = document.querySelector('.hero-carousel');
     if (carousel) initCarousel(carousel);
 
+    // Linha do tempo: a linha se desenha e os marcos acendem em sequência
+    var timelines = document.querySelectorAll('.timeline');
+    timelines.forEach(function (tl, t) {
+      tl.querySelectorAll('.timeline-dot').forEach(function (dot, i) { dot.style.setProperty('--i', i); });
+      if (t === timelines.length - 1) {
+        var items = tl.querySelectorAll('.timeline-item');
+        if (items.length) items[items.length - 1].classList.add('is-current');
+      }
+    });
+    var drawTimeline = function (tl) {
+      tl.classList.add('is-drawn');
+      setTimeout(function () { tl.classList.add('is-settled'); }, reduce ? 0 : 2400);
+    };
+    if (reduce || !('IntersectionObserver' in window)) timelines.forEach(drawTimeline);
+    else {
+      var timelineIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { drawTimeline(e.target); timelineIO.unobserve(e.target); }
+        });
+      }, { threshold: 0.35 });
+      timelines.forEach(function (tl) { timelineIO.observe(tl); });
+    }
+
     if (reduce || !('IntersectionObserver' in window)) return;
 
     // Entrada do hero, em sequência
@@ -184,7 +207,7 @@
     var selector = [
       '.page > section:not(.hero) h2',
       '.page > section:not(.hero) p',
-      '.page > section:not(.hero) [style*="display: grid"] > *',
+      '.page > section:not(.hero) [style*="display: grid"] > *:not(.timeline-line)',
       '.page > section:not(.hero) span[style*="text-transform: uppercase"]',
       '.page > section:not(.hero) img:not(.section-bg)',
       '.page > footer [style*="display: grid"] > *',
