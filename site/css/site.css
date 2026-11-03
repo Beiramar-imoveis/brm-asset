@@ -423,6 +423,60 @@ a:hover .card-photo { transform: scale(1.05); }
   .bg-section::before { background: rgba(0, 19, 32, .8); }
 }
 
+/* ---------- Linha do tempo (Sobre) ---------- */
+
+/* a linha fica atrás dos marcos; o preenchimento azul se desenha ao entrar na tela */
+.timeline .timeline-line { z-index: 0; overflow: hidden; border-radius: 2px; }
+.timeline-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--blue), var(--accent));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 2s var(--ease);
+}
+.timeline.is-drawn .timeline-line::after { transform: scaleX(1); }
+
+.timeline-item { position: relative; z-index: 1; }
+.timeline-year { transition: color .4s var(--ease), transform .4s var(--ease); transform-origin: 0 100%; }
+.timeline-dot {
+  position: relative;
+  z-index: 2;
+  transition: transform .55s cubic-bezier(.34, 1.56, .64, 1), background-color .4s ease, box-shadow .4s ease;
+  transition-delay: calc(var(--i, 0) * .3s + .15s);
+}
+/* antes de a linha passar, os marcos ficam apagados */
+.motion .timeline:not(.is-drawn) .timeline-dot { background: #C8D6EE !important; transform: scale(.55); }
+.timeline.is-settled .timeline-dot { transition-delay: 0s; }
+
+/* hover: o marco cresce e o ano ganha a cor da marca */
+.timeline-item:hover .timeline-dot { transform: scale(1.4); box-shadow: 0 0 0 7px rgba(29, 99, 255, .16) !important; }
+.timeline-item:hover .timeline-year { color: var(--accent) !important; transform: translateY(-2px); }
+
+/* o presente (2026) pulsa suavemente */
+@keyframes timeline-pulse { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(2.8); opacity: 0; } }
+.timeline-item.is-current .timeline-dot { background: var(--accent) !important; }
+.timeline.is-settled .timeline-item.is-current .timeline-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  animation: timeline-pulse 2.2s ease-out infinite;
+}
+
+/* tablet e celular: linha vertical ao lado dos marcos */
+@media (max-width: 1024px) {
+  .page .timeline[style] { grid-template-columns: minmax(0, 1fr) !important; row-gap: 40px !important; }
+  .page .timeline .timeline-line[style] { top: 8px; bottom: 8px; left: 6px; right: auto; width: 2px; height: auto; }
+  .timeline-line::after { background: linear-gradient(180deg, var(--blue), var(--accent)); transform: scaleY(0); transform-origin: 50% 0; }
+  .timeline.is-drawn .timeline-line::after { transform: scaleY(1); }
+  .page .timeline-item[style] { padding: 0 0 0 40px !important; gap: 10px !important; }
+  .timeline-dot { position: absolute; left: 0; top: 14px; }
+  .page .timeline-year[style] { font-size: 30px !important; }
+}
+
 /* ---------- Carrossel da Home ---------- */
 
 .hero-carousel { isolation: isolate; }
