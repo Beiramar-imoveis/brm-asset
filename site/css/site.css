@@ -424,57 +424,177 @@ a:hover .card-photo { transform: scale(1.05); }
 }
 
 /* ---------- Linha do tempo (Sobre) ---------- */
+/* Uma linha contínua de 1981 até hoje. A faixa de cima é o Grupo Beiramar (toda a linha);
+   a de baixo é a BRM Asset, que nasce dentro do grupo em 2021. A linha muda de cor em 2021. */
 
-/* a linha fica atrás dos marcos; o preenchimento azul se desenha ao entrar na tela */
-.timeline .timeline-line { z-index: 0; overflow: hidden; border-radius: 2px; }
-.timeline-line::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, var(--blue), var(--accent));
+.tl { display: flex; flex-direction: column; gap: 36px; }
+.tl-legend { display: flex; flex-wrap: wrap; gap: 12px 32px; margin-bottom: -12px; }
+.tl-legend-item { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: #667482; }
+.tl-legend-item strong { color: var(--navy); font-weight: 600; }
+.tl-legend-item::before { content: ""; width: 28px; height: 4px; border-radius: 4px; }
+.tl-legend-item--group::before { background: #D6E0F0; }
+.tl-legend-item--brm::before { background: #BFD3FF; }
+.tl-legend-item--brm strong { color: var(--accent); }
+.tl-scroller {
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  cursor: grab;
+  outline-offset: 6px;
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 96px), transparent);
+  mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 96px), transparent);
+}
+.tl-scroller::-webkit-scrollbar { display: none; }
+.tl-scroller.is-end { -webkit-mask-image: none; mask-image: none; }
+.tl-scroller.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.tl-track { list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 300px; }
+.tl-item { display: flex; flex-direction: column; scroll-snap-align: start; }
+.tl-item > :not(.tl-band):not(.tl-axis) { padding-right: 40px; }
+
+/* faixas: Grupo Beiramar (toda a linha) e BRM Asset (a partir de 2021) */
+.tl-band {
+  position: relative;
+  height: 34px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #667482;
+  white-space: nowrap;
+}
+.tl-band strong { color: var(--navy); font-weight: 600; }
+.tl-band::after { content: ""; position: absolute; left: 0; right: 0; bottom: 10px; height: 4px; }
+.tl-band--group::after { background: #D6E0F0; }
+.tl-item:first-child .tl-band--group::after { border-radius: 4px 0 0 4px; }
+.tl-item--brm .tl-band--brm::after { background: #BFD3FF; }
+.tl-item--brm .tl-band--brm strong { color: var(--accent); }
+.tl-item--brm-start .tl-band--brm::after { border-radius: 4px 0 0 4px; }
+.tl-band-end { margin-left: auto; padding-right: 4px; color: var(--blue); font-weight: 600; }
+.tl-band-end::after { content: " →"; }
+
+.tl-year {
+  margin-top: 14px;
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: -1px;
+  color: var(--blue);
+  transition: color .4s var(--ease), transform .4s var(--ease);
+  transform-origin: 0 100%;
+}
+.tl-item.is-current .tl-year { color: var(--accent); }
+
+/* eixo: trilho cinza + preenchimento que se desenha quando o marco entra na tela */
+.tl-axis { position: relative; display: block; height: 14px; margin: 18px 0 22px; }
+.tl-axis::before,
+.tl-axis::after { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 2px; }
+.tl-axis::before { background: #E3EAF5; }
+.tl-axis::after {
+  background: var(--blue);
   transform: scaleX(0);
   transform-origin: 0 50%;
-  transition: transform 2s var(--ease);
+  transition: transform .9s var(--ease);
 }
-.timeline.is-drawn .timeline-line::after { transform: scaleX(1); }
+.tl-item--brm .tl-axis::after { background: var(--accent); }
+.tl-item--brm-start .tl-axis::after { background: linear-gradient(90deg, var(--blue), var(--accent) 60%); }
+.tl-item.is-lit .tl-axis::after { transform: scaleX(1); }
+.tl-arrow {
+  position: absolute;
+  right: 0;
+  top: 2px;
+  width: 0;
+  height: 0;
+  border-left: 9px solid #E3EAF5;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  transition: border-color .4s ease .8s;
+}
+.tl-item.is-lit .tl-arrow { border-left-color: var(--accent); }
 
-.timeline-item { position: relative; z-index: 1; }
-.timeline-year { transition: color .4s var(--ease), transform .4s var(--ease); transform-origin: 0 100%; }
-.timeline-dot {
-  position: relative;
-  z-index: 2;
+.tl-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #C8D6EE;
+  box-shadow: 0 0 0 6px var(--white);
+  transform: scale(.6);
   transition: transform .55s cubic-bezier(.34, 1.56, .64, 1), background-color .4s ease, box-shadow .4s ease;
-  transition-delay: calc(var(--i, 0) * .3s + .15s);
 }
-/* antes de a linha passar, os marcos ficam apagados */
-.motion .timeline:not(.is-drawn) .timeline-dot { background: #C8D6EE !important; transform: scale(.55); }
-.timeline.is-settled .timeline-dot { transition-delay: 0s; }
-
-/* hover: o marco cresce e o ano ganha a cor da marca */
-.timeline-item:hover .timeline-dot { transform: scale(1.4); box-shadow: 0 0 0 7px rgba(29, 99, 255, .16) !important; }
-.timeline-item:hover .timeline-year { color: var(--accent) !important; transform: translateY(-2px); }
-
-/* o presente (2026) pulsa suavemente */
-@keyframes timeline-pulse { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(2.8); opacity: 0; } }
-.timeline-item.is-current .timeline-dot { background: var(--accent) !important; }
-.timeline.is-settled .timeline-item.is-current .timeline-dot::after {
+.tl-item.is-lit .tl-dot { background: var(--blue); transform: scale(1); box-shadow: 0 0 0 6px #EEF5FF; }
+.tl-item--brm.is-lit .tl-dot { background: var(--accent); box-shadow: 0 0 0 6px #E1EAFF; }
+@keyframes tl-pulse { 0% { transform: scale(1); opacity: .5; } 100% { transform: scale(2.8); opacity: 0; } }
+.tl-item.is-current.is-lit .tl-dot::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 999px;
   background: var(--accent);
-  animation: timeline-pulse 2.2s ease-out infinite;
+  animation: tl-pulse 2.2s ease-out .6s infinite;
 }
 
-/* tablet e celular: linha vertical ao lado dos marcos */
-@media (max-width: 1024px) {
-  .page .timeline[style] { grid-template-columns: minmax(0, 1fr) !important; row-gap: 40px !important; }
-  .page .timeline .timeline-line[style] { top: 8px; bottom: 8px; left: 6px; right: auto; width: 2px; height: auto; }
-  .timeline-line::after { background: linear-gradient(180deg, var(--blue), var(--accent)); transform: scaleY(0); transform-origin: 50% 0; }
-  .timeline.is-drawn .timeline-line::after { transform: scaleY(1); }
-  .page .timeline-item[style] { padding: 0 0 0 40px !important; gap: 10px !important; }
-  .timeline-dot { position: absolute; left: 0; top: 14px; }
-  .page .timeline-year[style] { font-size: 30px !important; }
+.tl-title { font-size: 20px; font-weight: 600; line-height: 1.25; color: var(--navy); }
+.tl-title a { display: inline-flex; align-items: center; gap: 6px; text-decoration: underline; text-decoration-color: #BFD3FF; text-underline-offset: 4px; text-decoration-thickness: 2px; transition: color .3s var(--ease), text-decoration-color .3s var(--ease); }
+.tl-title a:hover { color: var(--accent); text-decoration-color: currentColor; opacity: 1; }
+.tl-ext { flex-shrink: 0; }
+.tl-text { margin-top: 12px; font-size: 14px; line-height: 1.6; color: #4A5866; }
+.tl-text strong { color: var(--blue) !important; }
+
+.tl-item:hover .tl-dot { transform: scale(1.4); }
+.tl-item:hover .tl-year { color: var(--accent); transform: translateY(-2px); }
+
+/* controles: setas e barra de progresso */
+.tl-controls { display: flex; align-items: center; gap: 16px; }
+.tl-controls button {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid #C8D6EE;
+  background: var(--white);
+  color: var(--navy);
+  cursor: pointer;
+  transition: background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), opacity .3s;
+}
+.tl-controls button:hover:not(:disabled) { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.tl-controls button:disabled { opacity: .35; cursor: default; }
+.tl-progress { position: relative; flex: 0 1 220px; height: 2px; background: #E3EAF5; border-radius: 2px; overflow: hidden; }
+.tl-progress span { position: absolute; inset: 0; background: linear-gradient(90deg, var(--blue), var(--accent)); transform: scaleX(0); transform-origin: 0 50%; }
+
+/* sem animação: tudo aceso desde o início */
+html:not(.motion) .tl-item .tl-axis::after { transform: scaleX(1); }
+html:not(.motion) .tl-item .tl-dot { transform: scale(1); background: var(--blue); }
+html:not(.motion) .tl-item--brm .tl-dot { background: var(--accent); }
+
+/* celular: linha vertical, faixas viram etiquetas */
+@media (max-width: 760px) {
+  .tl-scroller { overflow: visible; cursor: auto; -webkit-mask-image: none; mask-image: none; }
+  .tl-track { grid-auto-flow: row; grid-auto-columns: auto; }
+  .tl-item { position: relative; padding: 0 0 36px 40px; }
+  .tl-item > :not(.tl-band):not(.tl-axis) { padding-right: 0; }
+  .tl-band { height: auto; }
+  .tl-band::after { display: none; }
+  .tl-band:empty { display: none; }
+  .tl-band:not(:empty) { margin-bottom: 10px; flex-wrap: wrap; white-space: normal; }
+  .tl-band-end { display: none; }
+  .tl-year { margin-top: 0; font-size: 30px; }
+  .tl-axis { position: absolute; left: 0; top: 0; bottom: 0; height: auto; width: 14px; margin: 0; }
+  .tl-axis::before, .tl-axis::after { left: 6px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; }
+  .tl-axis::after { transform: scaleY(0); transform-origin: 50% 0; }
+  .tl-item.is-lit .tl-axis::after, html:not(.motion) .tl-item .tl-axis::after { transform: scaleY(1); }
+  .tl-item--brm-start .tl-axis::after { background: linear-gradient(180deg, var(--blue), var(--accent) 60%); }
+  .tl-dot { top: 12px; }
+  .tl-item:has(.tl-band:not(:empty)) .tl-dot { top: 44px; }
+  .tl-arrow { display: none; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-controls { display: none; }
+  .tl-legend { display: none; }
 }
 
 /* ---------- Carrossel da Home ---------- */

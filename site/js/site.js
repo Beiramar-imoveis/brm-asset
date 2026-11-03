@@ -162,27 +162,68 @@
     var carousel = document.querySelector('.hero-carousel');
     if (carousel) initCarousel(carousel);
 
-    // Linha do tempo: a linha se desenha e os marcos acendem em sequência
-    var timelines = document.querySelectorAll('.timeline');
-    timelines.forEach(function (tl, t) {
-      tl.querySelectorAll('.timeline-dot').forEach(function (dot, i) { dot.style.setProperty('--i', i); });
-      if (t === timelines.length - 1) {
-        var items = tl.querySelectorAll('.timeline-item');
-        if (items.length) items[items.length - 1].classList.add('is-current');
+    // Linha do tempo (Sobre): faixa horizontal com setas, progresso e arrastar;
+    // cada marco acende quando entra na área visível
+    var tl = document.querySelector('.tl');
+    if (tl) {
+      var scroller = tl.querySelector('.tl-scroller');
+      var tlItems = Array.prototype.slice.call(tl.querySelectorAll('.tl-item'));
+      var prev = tl.querySelector('.tl-prev');
+      var next = tl.querySelector('.tl-next');
+      var bar = tl.querySelector('.tl-progress span');
+      var step = function () { return (tlItems[0] ? tlItems[0].offsetWidth : 300) * 2; };
+      var update = function () {
+        var max = scroller.scrollWidth - scroller.clientWidth;
+        var pos = max > 0 ? scroller.scrollLeft / max : 1;
+        bar.style.transform = 'scaleX(' + Math.max(pos, .04) + ')';
+        prev.disabled = scroller.scrollLeft <= 2;
+        next.disabled = scroller.scrollLeft >= max - 2;
+        scroller.classList.toggle('is-end', scroller.scrollLeft >= max - 2);
+      };
+      prev.addEventListener('click', function () { scroller.scrollBy({ left: -step(), behavior: reduce ? 'auto' : 'smooth' }); });
+      next.addEventListener('click', function () { scroller.scrollBy({ left: step(), behavior: reduce ? 'auto' : 'smooth' }); });
+      scroller.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+
+      // arrastar com o mouse (no toque, o deslizar nativo já funciona)
+      var drag = null;
+      scroller.addEventListener('pointerdown', function (e) {
+        if (e.pointerType !== 'mouse' || e.button !== 0) return;
+        drag = { x: e.clientX, left: scroller.scrollLeft, moved: false };
+      });
+      window.addEventListener('pointermove', function (e) {
+        if (!drag) return;
+        var dx = e.clientX - drag.x;
+        if (Math.abs(dx) > 5) { drag.moved = true; scroller.classList.add('is-dragging'); }
+        if (drag.moved) scroller.scrollLeft = drag.left - dx;
+      });
+      window.addEventListener('pointerup', function () {
+        if (!drag) return;
+        var moved = drag.moved;
+        drag = null;
+        scroller.classList.remove('is-dragging');
+        if (moved) scroller.addEventListener('click', function block(ev) { ev.preventDefault(); ev.stopPropagation(); scroller.removeEventListener('click', block, true); }, true);
+      });
+
+      // marcos acendem em sequência ao entrar na tela
+      if (reduce || !('IntersectionObserver' in window)) tlItems.forEach(function (it) { it.classList.add('is-lit'); });
+      else {
+        var queue = [], timer = null;
+        var flush = function () {
+          var it = queue.shift();
+          if (!it) { timer = null; return; }
+          it.classList.add('is-lit');
+          timer = setTimeout(flush, 220);
+        };
+        var litIO = new IntersectionObserver(function (entries) {
+          entries.filter(function (e) { return e.isIntersecting; })
+            .sort(function (x, y) { return tlItems.indexOf(x.target) - tlItems.indexOf(y.target); })
+            .forEach(function (e) { queue.push(e.target); litIO.unobserve(e.target); });
+          if (!timer) flush();
+        }, { threshold: 0.6 });
+        tlItems.forEach(function (it) { litIO.observe(it); });
       }
-    });
-    var drawTimeline = function (tl) {
-      tl.classList.add('is-drawn');
-      setTimeout(function () { tl.classList.add('is-settled'); }, reduce ? 0 : 2400);
-    };
-    if (reduce || !('IntersectionObserver' in window)) timelines.forEach(drawTimeline);
-    else {
-      var timelineIO = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { drawTimeline(e.target); timelineIO.unobserve(e.target); }
-        });
-      }, { threshold: 0.35 });
-      timelines.forEach(function (tl) { timelineIO.observe(tl); });
     }
 
     if (reduce || !('IntersectionObserver' in window)) return;
@@ -207,7 +248,7 @@
     var selector = [
       '.page > section:not(.hero) h2',
       '.page > section:not(.hero) p',
-      '.page > section:not(.hero) [style*="display: grid"] > *:not(.timeline-line)',
+      '.page > section:not(.hero) [style*="display: grid"] > *',
       '.page > section:not(.hero) span[style*="text-transform: uppercase"]',
       '.page > section:not(.hero) img:not(.section-bg)',
       '.page > footer [style*="display: grid"] > *',
