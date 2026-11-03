@@ -177,7 +177,7 @@ window.BRM_I18N_EN = {
   "1981 — hoje": "1981 — today",
   "2021 — hoje": "2021 — today",
   "segue em atividade": "still active",
-  "Linha do tempo de 1981 a 2026": "Timeline from 1981 to 2026",
+  "Linha do tempo de 1981 até hoje": "Timeline from 1981 to today",
   "Site da Beiramar Imóveis (abre em nova aba)": "Beiramar Imóveis website (opens in a new tab)",
   "Anterior": "Previous",
   "Próximo": "Next",
