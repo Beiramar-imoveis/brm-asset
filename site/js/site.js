@@ -226,6 +226,21 @@
       }
     }
 
+    // Páginas legais: o sumário destaca a seção que está na tela
+    var tocLinks = document.querySelectorAll('.legal-toc a');
+    if (tocLinks.length && 'IntersectionObserver' in window) {
+      var byId = {};
+      tocLinks.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+      var tocIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          tocLinks.forEach(function (a) { a.classList.remove('is-active'); });
+          if (byId[e.target.id]) byId[e.target.id].classList.add('is-active');
+        });
+      }, { rootMargin: '-120px 0px -65% 0px' });
+      document.querySelectorAll('.legal-body h2[id]').forEach(function (h) { tocIO.observe(h); });
+    }
+
     if (reduce || !('IntersectionObserver' in window)) return;
 
     // Entrada do hero, em sequência
@@ -246,11 +261,11 @@
 
     // Revelação ao rolar: títulos, textos, cartões e colunas do rodapé
     var selector = [
-      '.page > section:not(.hero) h2',
-      '.page > section:not(.hero) p',
-      '.page > section:not(.hero) [style*="display: grid"] > *',
-      '.page > section:not(.hero) span[style*="text-transform: uppercase"]',
-      '.page > section:not(.hero) img:not(.section-bg)',
+      '.page > section:not(.hero):not(.legal) h2',
+      '.page > section:not(.hero):not(.legal) p',
+      '.page > section:not(.hero):not(.legal) [style*="display: grid"] > *',
+      '.page > section:not(.hero):not(.legal) span[style*="text-transform: uppercase"]',
+      '.page > section:not(.hero):not(.legal) img:not(.section-bg)',
       '.page > footer [style*="display: grid"] > *',
       '.page > footer [style*="border-top"]'
     ].join(',');

@@ -16,6 +16,9 @@ Site estático da BRM Asset. As páginas publicadas ficam na pasta `site/`.
 | Atuação | `site/atuacao.html` | `/atuacao` |
 | Governança e compliance | `site/governanca.html` | `/governanca` |
 | Contato | `site/contato.html` | `/contato` |
+| Política de Privacidade | `site/politica-de-privacidade.html` | `/politica-de-privacidade` |
+| Termos de Uso | `site/termos-de-uso.html` | `/termos-de-uso` |
+| Política de Cookies | `site/cookies.html` | `/cookies` |
 
 ## Como atualizar
 
@@ -53,6 +56,26 @@ por texto: `"texto em português": "texto em inglês"`.
   endereços aparecem na lista, mas não precisam de tradução.
 - Os avisos legais em inglês precisam da mesma validação de Compliance que os textos em português.
 
+## Privacidade e cookies (LGPD)
+
+- **Aviso de cookies:** aparece na primeira visita, com "Aceitar todos", "Rejeitar opcionais" e
+  "Personalizar". A escolha fica salva por 12 meses (`brm-consent`). O código está em `site/js/cookies.js`.
+- **Reabrir as preferências:** qualquer elemento com o atributo `data-cookie-preferences` abre o painel
+  (há um botão na página de Cookies).
+- **Adicionar uma ferramenta de análise ou marketing** (Google Analytics, Meta Pixel etc.): ela só pode rodar
+  com consentimento. Coloque o script no `<head>` assim, e o `cookies.js` ativa só para quem autorizou:
+
+  ```html
+  <script type="text/plain" data-cookie-category="analytics" data-src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
+  <script type="text/plain" data-cookie-category="analytics">/* configuração da ferramenta */</script>
+  ```
+
+  Use `analytics` ou `marketing`. **Ao adicionar uma ferramenta, inclua-a na tabela da Política de Cookies**
+  (`site/cookies.html`). Se usar o Google Consent Mode, o `cookies.js` já envia as atualizações de
+  consentimento ao `gtag`.
+- **Dados a preencher nas políticas:** CNPJ da BRM Asset e nome e e-mail do encarregado (DPO), marcados
+  entre colchetes em `site/politica-de-privacidade.html` e `site/termos-de-uso.html`.
+
 ## Animações
 
 Ficam em `site/js/site.js` e no fim de `site/css/site.css`, no mesmo vocabulário do site do Grupo Beiramar:
@@ -86,7 +109,8 @@ usadas só como referência (ver `docs/referencia-design.md`). Não são publica
 
 ## Pendências de conteúdo
 
-- PDFs dos fundos, notícias, Política de Privacidade, Termos de Uso e Cookies ainda apontam para `#`.
+- PDFs dos fundos e notícias ainda apontam para `#`.
+- Políticas: preencher CNPJ e encarregado (DPO) e validar os textos com o Jurídico/Compliance.
 - O formulário de contato não tem envio configurado (precisa de backend ou serviço de formulários).
 - Foto do Jardins do Cerrado (Atuação) e selos "Fundo: [a definir]" dos empreendimentos.
 - O design só tem versões desktop: a adaptação para tablet e celular foi feita no CSS.

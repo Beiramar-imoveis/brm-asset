@@ -20,6 +20,7 @@
 <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("motion")</script>
 <script>(function(){var d=document.documentElement,l=null;try{var q=new URLSearchParams(location.search).get("lang");if(q==="en"||q==="pt")localStorage.setItem("brm-lang",q);l=localStorage.getItem("brm-lang")}catch(e){}if(l==="en")d.classList.add("i18n-pending")})()</script>
 <script src="js/i18n-en.js" defer></script>
+<script src="js/cookies.js" defer></script>
 <script src="js/site.js" defer></script>
 </head>
 <body>
@@ -65,7 +66,7 @@
 <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: #001320"><span>Tipo de contato<span style="color: #1D63FF" aria-hidden="true"> *</span></span><select required="" style="height: 52px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C8D6EE; background: #FFFFFF; padding: 0 16px; font-size: 16px; color: #001320"><option>Investidor</option><option>Cotista</option><option>Incorporador parceiro</option><option>Imprensa</option><option>Outro assunto</option></select></label>
 </div>
 <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: #001320"><span>Mensagem<span style="color: #1D63FF" aria-hidden="true"> *</span></span><textarea required="" placeholder="Conte brevemente o motivo do contato." style="height: 168px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C8D6EE; background: #FFFFFF; padding: 14px 16px; font-size: 16px; font-family: inherit; color: #001320; resize: vertical"></textarea></label>
-<label style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.5; color: #4A5866"><input type="checkbox" required="" style="margin-top: 3px; width: 18px; height: 18px; accent-color: #00458C"><span>Li e concordo com a <a href="#" style="color: #00458C; font-weight: 600; text-decoration: underline">Política de Privacidade</a> e autorizo o uso dos meus dados para retorno deste contato, conforme a LGPD.</span></label>
+<label style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.5; color: #4A5866"><input type="checkbox" required="" style="margin-top: 3px; width: 18px; height: 18px; accent-color: #00458C"><span>Li e concordo com a <a href="politica-de-privacidade.html" style="color: #00458C; font-weight: 600; text-decoration: underline">Política de Privacidade</a> e autorizo o uso dos meus dados para retorno deste contato, conforme a LGPD.</span></label>
 <button type="button" style="align-self: flex-start; height: 56px; padding: 0 34px; border-radius: 999px; border: none; background: var(--accent); color: var(--white); font-size: 16px; font-weight: 600">Enviar mensagem</button>
 </div>
 
@@ -140,7 +141,7 @@
 </div>
 <div style="display: flex; justify-content: space-between; font-size: 13px; color: #8FA2C2">
 <span>© 2026 BRM Asset Gestão de Recursos Ltda. Todos os direitos reservados.</span>
-<div style="display: flex; gap: 24px"><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a><a href="#">Cookies</a></div>
+<div style="display: flex; gap: 24px"><a href="politica-de-privacidade.html">Política de Privacidade</a><a href="termos-de-uso.html">Termos de Uso</a><a href="cookies.html">Cookies</a></div>
 </div>
 </div>
 </footer>
