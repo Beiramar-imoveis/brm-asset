@@ -1,29 +1,92 @@
-# Home — desktop — design reference
+# Site BRM Asset
 
-This is a design mockup created in a visual design tool, exported as a
-standalone page. Treat it as a REFERENCE MOCKUP, not production code:
-the markup and inline styles carry the design's precise values — colors,
-font sizes, spacing, radii, shadows, layout — which an implementation
-should replicate faithfully in its own components and styling system
-rather than copy wholesale.
+https://brmasset.com.br
 
-## Contents
+Site estático da BRM Asset. As páginas publicadas ficam na pasta `site/`.
 
-- `Main.dc.html` — the artboard (a Design Component: an `<x-dc>`
-  template + a small logic class). The values to replicate live in its
-  inline `style="…"` attributes and the `<helmet><style>` block.
-- `assets/` — files uploaded to the design (images, fonts, media)
-- `support.js`, `vendor/react*.js` — the runtime that renders the
-  component in a browser; not part of the design.
+| Página | Arquivo | Endereço |
+| --- | --- | --- |
+| Home | `site/index.html` | `/` |
+| Sobre | `site/sobre.html` | `/sobre` |
+| Time | `site/time.html` | `/time` |
+| Fundos | `site/fundos.html` | `/fundos` |
+| BRM Minha Casa Minha Vida | `site/fundo-mcmv.html` | `/fundo-mcmv` |
+| BRM Multiestratégia | `site/fundo-brme.html` | `/fundo-brme` |
+| BRM Renda Imobiliária | `site/fundo-brmr.html` | `/fundo-brmr` |
+| Atuação | `site/atuacao.html` | `/atuacao` |
+| Governança e compliance | `site/governanca.html` | `/governanca` |
+| Contato | `site/contato.html` | `/contato` |
 
-## Uploaded files
+## Como atualizar
 
-Images, fonts and media uploaded to the design are written once each under
-`assets/` — 4 in this export — and the exported files refer to them there. A
-reference a script puts together while the page runs (for example
-`"/_blob/" + id`) is not rewritten and does not load from this folder.
+**A pasta `site/` é a fonte oficial do site.** Edite as páginas diretamente aqui (VS Code + Live Server).
 
-## Viewing
+⚠️ Não rode mais `tools/build_site.py`: ele recria as páginas a partir dos arquivos do design e apagaria
+as edições feitas direto em `site/` (fotos dos empreendimentos, carrossel e ajustes manuais).
+Ele fica no repositório só como histórico da conversão inicial.
 
-Serve the folder (e.g. `python3 -m http.server`) and open `Main.dc.html`;
-some browsers block the scripts over file://.
+Ajustes de base, cores (`--accent`, `--blue`…) e adaptação a tablet/celular ficam em `site/css/site.css`.
+
+## Fotos dos empreendimentos
+
+Em `site/assets/`, em WebP com até 1600 px (cada uma com 100–350 KB). Para trocar ou incluir uma foto,
+otimize antes de subir (ex.: squoosh.app → WebP, qualidade 80, largura 1600) e mantenha o nome do
+empreendimento no arquivo (`casa-pedra.webp`).
+
+## Carrossel da Home
+
+Troca a cada 7 s, com aproximação lenta da foto. Pausa com o mouse em cima, fora da tela ou com a aba em
+segundo plano; aceita setas, pontos, miniaturas e deslizar no celular. As miniaturas são fixas (uma por
+ativo, na mesma ordem dos slides, com `data-index`); a do ativo em destaque fica realçada. Para mudar o tempo, altere `7s`
+em `.slide-dot.is-active span::after` no `site.css`. Os ativos ficam em `site/index.html` (`slide-photo`).
+
+## Versão em inglês (PT · EN)
+
+O HTML de cada página continua só em português. As traduções ficam em `site/js/i18n-en.js`, uma linha
+por texto: `"texto em português": "texto em inglês"`.
+
+- O botão PT · EN do cabeçalho (e do menu no celular) troca o idioma na hora; a escolha vale para todas
+  as páginas. Um link com `?lang=en` (ex.: `…/index.html?lang=en`) abre o site direto em inglês.
+- **Ao mudar ou incluir um texto em português, atualize o `i18n-en.js`.** O que não estiver lá continua
+  aparecendo em português na versão em inglês.
+- Para conferir o que falta traduzir: `python3 tools/check_translations.py`. Nomes próprios, siglas e
+  endereços aparecem na lista, mas não precisam de tradução.
+- Os avisos legais em inglês precisam da mesma validação de Compliance que os textos em português.
+
+## Animações
+
+Ficam em `site/js/site.js` e no fim de `site/css/site.css`, no mesmo vocabulário do site do Grupo Beiramar:
+entrada em sequência no topo, revelação ao rolar, cabeçalho compacto fixo, barra de progresso, contagem dos
+números, hover em botões, cartões e fotos, e transição entre páginas. Quem configura o sistema para
+"reduzir movimento" vê o site sem animações.
+
+## Publicação e indexação no Google
+
+- **Endereço oficial:** https://brmasset.com.br, hospedado na Hostinger com implantação a partir da branch
+  `main`. O `.htaccess` na raiz do repositório serve a pasta `site/` no endereço principal, com endereços
+  limpos (`/sobre`, `/fundos`) e redirecionamento dos antigos (`/site/…`, `….html`).
+- Qualquer ajuste no `.htaccess` deve ser feito no repositório, não direto no servidor.
+- Cada página tem `<link rel="canonical">` apontando para o endereço oficial, então a cópia no GitHub Pages
+  (beiramar-imoveis.github.io/brm-asset) não compete com o domínio nas buscas.
+- `site/robots.txt` libera a indexação e indica o `site/sitemap.xml`. **Ao criar ou remover uma página,
+  atualize o sitemap.**
+- A Home traz os dados da empresa para o Google (bloco `application/ld+json`): nome, endereço, logo e
+  redes sociais.
+
+## Visualizar
+
+```sh
+cd site && python3 -m http.server
+```
+
+## Referência do design
+
+Os arquivos `*.dc.html` na raiz e nas pastas `* — desktop-html/` são as exportações originais do design,
+usadas só como referência (ver `docs/referencia-design.md`). Não são publicados.
+
+## Pendências de conteúdo
+
+- PDFs dos fundos, notícias, Política de Privacidade, Termos de Uso e Cookies ainda apontam para `#`.
+- O formulário de contato não tem envio configurado (precisa de backend ou serviço de formulários).
+- Foto do Jardins do Cerrado (Atuação) e selos "Fundo: [a definir]" dos empreendimentos.
+- O design só tem versões desktop: a adaptação para tablet e celular foi feita no CSS.
