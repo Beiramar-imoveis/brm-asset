@@ -89,8 +89,8 @@ números, hover em botões, cartões e fotos, e transição entre páginas. Quem
   `main`. O `.htaccess` na raiz do repositório serve a pasta `site/` no endereço principal, com endereços
   limpos (`/sobre`, `/fundos`) e redirecionamento dos antigos (`/site/…`, `….html`).
 - Qualquer ajuste no `.htaccess` deve ser feito no repositório, não direto no servidor.
-- Cada página tem `<link rel="canonical">` apontando para o endereço oficial, então a cópia no GitHub Pages
-  (beiramar-imoveis.github.io/brm-asset) não compete com o domínio nas buscas.
+- Cada página tem `<link rel="canonical">` apontando para o endereço oficial (`https://brmasset.com.br/…`).
+- A Hostinger é o único local de publicação. A antiga cópia no GitHub Pages foi desativada.
 - `site/robots.txt` libera a indexação e indica o `site/sitemap.xml`. **Ao criar ou remover uma página,
   atualize o sitemap.**
 - A Home traz os dados da empresa para o Google (bloco `application/ld+json`): nome, endereço, logo e
