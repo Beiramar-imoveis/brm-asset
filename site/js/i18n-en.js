@@ -236,6 +236,7 @@ window.BRM_I18N_EN = {
   "Diretor de Investment Banking e Estruturação de Fundos": "Director of Investment Banking and Fund Structuring",
   "Ampla experiência em crédito imobiliário e estruturação de operações financeiras. Lidera a estruturação dos fundos e as operações de equity e crédito da BRM Asset.": "Extensive experience in real estate credit and structuring financial transactions. Leads fund structuring and BRM Asset's equity and credit transactions.",
   "[Cargo]": "[Title]",
+  "Especialista em Novos Negócios": "New Business Specialist",
   "Profissional de investimentos imobiliários, com atuação em estruturação de operações, gestão de fundos e novos negócios. Engenheiro civil pela UFSC e Master pela École Centrale de Lyon (França).": "Real estate investment professional working in transaction structuring, fund management and new business. Civil engineer from UFSC with a Master's degree from École Centrale de Lyon (France).",
   "Responsável pela originação e pelo acompanhamento dos investimentos da BRM Asset na regional de Santa Catarina. Experiência em incorporação imobiliária e estruturação de negócios.": "Responsible for originating and monitoring BRM Asset's investments in the Santa Catarina region. Experience in real estate development and deal structuring.",
   "[Bio a validar — formação, área de atuação e experiência.]": "[Bio pending — education, area of expertise and experience.]",
