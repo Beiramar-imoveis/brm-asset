@@ -1,0 +1,37 @@
+# Alerta automático: confere se todos os textos do site têm tradução para o inglês.
+# Roda a cada alteração nas páginas ou no arquivo de traduções. Se algum texto ficar
+# sem tradução, a execução fica vermelha, aponta o texto e a página, e o GitHub avisa
+# por e-mail quem enviou a alteração. Não interfere na publicação do site.
+name: Verificar traduções
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**.html"
+      - "site/js/i18n-en.js"
+      - "tools/check_translations.py"
+      - "tools/translation-ignore.txt"
+      - ".github/workflows/traducoes.yml"
+  pull_request:
+    paths:
+      - "site/**.html"
+      - "site/js/i18n-en.js"
+      - "tools/check_translations.py"
+      - "tools/translation-ignore.txt"
+      - ".github/workflows/traducoes.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  traducoes:
+    name: Textos com tradução para o inglês
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 tools/check_translations.py --github --strict
