@@ -296,6 +296,7 @@ window.BRM_I18N_EN = {
   "[Descrição a validar com a gestão]": "[Description pending management review]",
   "Ficha técnica": "Fact sheet",
   "Atualizado em [mês/aaaa]": "Updated [mm/yyyy]",
+  "Atualizado em novembro/2026": "Updated November 2026",
   "Tipo": "Type",
   "Tese": "Strategy",
   "Gestor": "Manager",
