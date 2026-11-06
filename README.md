@@ -52,8 +52,13 @@ por texto: `"texto em português": "texto em inglês"`.
   as páginas. Um link com `?lang=en` (ex.: `…/index.html?lang=en`) abre o site direto em inglês.
 - **Ao mudar ou incluir um texto em português, atualize o `i18n-en.js`.** O que não estiver lá continua
   aparecendo em português na versão em inglês.
-- Para conferir o que falta traduzir: `python3 tools/check_translations.py`. Nomes próprios, siglas e
-  endereços aparecem na lista, mas não precisam de tradução.
+- **Alerta automático no GitHub:** a cada alteração nas páginas ou no `i18n-en.js`, a rotina
+  *Verificar traduções* (aba Actions) confere se todo texto em português tem tradução. Se faltar alguma,
+  ela fica vermelha, mostra o texto e a página, e o GitHub avisa por e-mail quem enviou a alteração. Ela
+  também acusa erros de digitação no `i18n-en.js` (aspas, vírgulas). Não interfere na publicação do site.
+- Para conferir no seu computador: `python3 tools/check_translations.py`.
+- Textos que não se traduzem (nomes próprios, siglas, endereços) ficam em `tools/translation-ignore.txt`.
+  Ao incluir uma pessoa ou empreendimento novo, acrescente o nome lá.
 - Os avisos legais em inglês precisam da mesma validação de Compliance que os textos em português.
 
 ## Privacidade e cookies (LGPD)

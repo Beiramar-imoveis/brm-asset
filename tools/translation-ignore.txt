@@ -1,0 +1,85 @@
+# Textos do site que NÃO precisam de tradução para o inglês
+# (nomes de pessoas, empreendimentos, empresas, cidades, endereços, siglas e códigos técnicos).
+# Um texto por linha, exatamente como aparece no site. Linhas começando com # são comentários.
+# Usado por tools/check_translations.py e pelo alerta automático do GitHub (Verificar traduções).
+
+12M
+24M
+3M
+6M
+Adriano Paiva
+Asa Sul
+Atlântida
+BRM Asset
+BRM Asset Gestão de Recursos Ltda.
+BRM E
+BRM FII
+BRM MCMV
+BRM Minha Casa Minha Vida
+BRM Minha Casa Minha Vida III FII
+BRME
+BRMR
+BTG Pactual Serviços Financeiros DTVM
+BTS
+Beiramar Imóveis
+Brasília
+Brasília · DF
+Brasília · Goiânia
+Brava Riserva
+CLS 402, Bloco A, Loja 27
+Casa 35
+Casa 35 — Águas Claras · DF
+Casa Pedra
+Cidade Ocidental · GO
+Cookies
+DF
+EN
+Eleva 25
+Eleva 25 — Águas Claras · DF
+English
+Fernando Carvalho
+Fernando Garrido
+Florianópolis
+Florianópolis · Itajaí
+GL
+GO
+Gleicielle Bartasson
+Goiânia · GO
+Gran Veneza
+Grupo Beiramar
+Guilherme Landeiro
+Instagram
+Itajaí · SC
+Jardins do Cerrado
+João Lucas
+K
+LinkedIn
+M
+MCMV11 · MCMV15
+Marcela
+Marítima
+Milton Ziehlsdorff
+NY
+Next
+Next — Taguatinga · DF
+Ouribank S.A.
+PDF
+PT
+Parque Vivá
+Paulo Fernandes
+Pedro Fernandes
+Português
+R$ 510
+Rio Verde
+Rua Bocaiúva, 2125
+SC
+Taguatinga · DF
+Vila Campos
+Vila Campos — Cidade Ocidental · GO
+Vitrium / Sírio-Libanês
+Vitória Vilela
+brm-consent
+brm-lang
+iaas — Operations and Governance Standards
+ri@brmasset.com.br
+Águas Claras · DF
