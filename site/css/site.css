@@ -746,17 +746,51 @@ html:not(.motion) .tl-item--brm .tl-dot { background: var(--accent); }
 
 /* ---------- Documentos oficiais ---------- */
 
-.doc-filters button { cursor: pointer; font-family: inherit; transition: background-color .3s var(--ease), color .3s var(--ease); }
-.doc-filters button[aria-pressed="false"] { background: transparent; }
-.doc-filters button[aria-pressed="false"]:hover { background: var(--ice) !important; }
+/* filtros por tipo: o estado visual vem só do aria-pressed */
+.doc-filters button[style] {
+  border: 1px solid #C8D6EE !important;
+  background: transparent !important;
+  color: var(--blue) !important;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+}
+.doc-filters button[style]:hover { background: var(--ice) !important; }
+.doc-filters button[aria-pressed="true"][style] { background: var(--blue) !important; border-color: var(--blue) !important; color: var(--white) !important; }
 .doc-row:last-child { border-bottom: 0 !important; }
-.doc-row a:hover { text-decoration: underline; text-underline-offset: 3px; opacity: 1; }
+.doc-row a:hover, .gov-doc:hover span:last-child { text-decoration: underline; text-underline-offset: 3px; opacity: 1; }
+
+/* tablet e celular: um cartão por documento, no mesmo padrão nas páginas dos fundos e na Governança */
+@media (max-width: 1024px) {
+  .doc-filters[style] { gap: 8px !important; }
+  .doc-filters button[style] { height: 36px !important; padding: 0 14px !important; font-size: 13px !important; }
+
+  .page .doc-table > div:first-child { display: none !important; }
+  .page .doc-row[style] {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-areas: "tipo data" "titulo titulo" "link link";
+    gap: 10px 16px !important;
+    min-height: 0 !important;
+    padding: 20px !important;
+  }
+  .page .doc-row > span:nth-child(1) { grid-area: data; justify-self: end; align-self: center; font-size: 13px; white-space: nowrap; }
+  .page .doc-row > span:nth-child(2)[style] { grid-area: tipo; justify-self: start !important; align-self: center; }
+  .page .doc-row > span:nth-child(3) { grid-area: titulo; font-size: 16px; line-height: 1.4; font-weight: 500; }
+  .page .doc-row > a[style] { grid-area: link; justify-self: start !important; margin-top: 2px; }
+
+  .page .gov-docs[style] { gap: 10px !important; }
+  .page .gov-doc[style] {
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    padding: 20px !important;
+  }
+  .page .gov-doc > span:first-child { font-size: 16px; line-height: 1.4; }
+}
 @media (max-width: 760px) {
-  .page .doc-table [style*="grid-template-columns: 150px"] { grid-template-columns: minmax(0, 1fr) auto !important; gap: 6px 16px !important; }
-  .page .doc-table [style*="grid-template-columns: 150px"]:first-child { display: none !important; }
-  .doc-row > span:nth-child(2) { justify-self: end !important; }
-  .doc-row > span:nth-child(3) { grid-column: 1 / -1; }
-  .doc-row > a[style] { grid-column: 1 / -1; justify-self: start !important; }
+  .page .gov-docs[style] { grid-template-columns: minmax(0, 1fr) !important; }
 }
 
 /* ---------- Carrossel da Home ---------- */
