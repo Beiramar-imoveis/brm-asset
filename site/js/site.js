@@ -334,6 +334,7 @@
     var count = root.querySelector('.slide-count');
     var name = root.querySelector('.slide-name');
     var place = root.querySelector('.slide-place');
+    var fund = root.querySelector('.slide-fund');
     var total = photos.length, current = 0;
     if (total < 2) return;
 
@@ -349,6 +350,7 @@
       setTimeout(function () {
         name.textContent = photo.dataset.name;
         place.textContent = photo.dataset.place;
+        if (fund && photo.dataset.fund) fund.textContent = photo.dataset.fund;
         count.textContent = (current + 1 < 10 ? '0' : '') + (current + 1);
         [name, place, count].forEach(function (el) { el.classList.remove('is-changing'); });
       }, 280);
