@@ -24,9 +24,6 @@ Site estático da BRM Asset. As páginas publicadas ficam na pasta `site/`.
 
 **A pasta `site/` é a fonte oficial do site.** Edite as páginas diretamente aqui (VS Code + Live Server).
 
-⚠️ Não rode mais `tools/build_site.py`: ele recria as páginas a partir dos arquivos do design e apagaria
-as edições feitas direto em `site/` (fotos dos empreendimentos, carrossel e ajustes manuais).
-Ele fica no repositório só como histórico da conversão inicial.
 
 Ajustes de base, cores (`--accent`, `--blue`…) e adaptação a tablet/celular ficam em `site/css/site.css`.
 
@@ -107,10 +104,19 @@ números, hover em botões, cartões e fotos, e transição entre páginas. Quem
 cd site && python3 -m http.server
 ```
 
-## Referência do design
+## Estrutura do repositório
 
-Os arquivos `*.dc.html` na raiz e nas pastas `* — desktop-html/` são as exportações originais do design,
-usadas só como referência (ver `docs/referencia-design.md`). Não são publicados.
+| Caminho | Para que serve |
+| --- | --- |
+| `site/` | O site publicado (páginas, CSS, JS, imagens e documentos). |
+| `.htaccess` | Configuração da hospedagem (Hostinger): serve `site/` no endereço principal. **Não apagar.** |
+| `.github/workflows/traducoes.yml` | Alerta automático de textos sem tradução para o inglês. |
+| `tools/check_translations.py` e `tools/translation-ignore.txt` | Verificação de traduções usada pelo alerta. |
+| `docs/` | Documentação de apoio (créditos das imagens). |
+| `.vscode/` | Configuração do VS Code para a equipe (extensões e Live Server). |
+
+As exportações originais do design (arquivos `*.dc.html`) foram removidas em novembro de 2026 e continuam
+disponíveis no histórico do Git, se forem necessárias.
 
 ## Pendências de conteúdo
 
