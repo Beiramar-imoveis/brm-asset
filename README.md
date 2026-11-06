@@ -58,6 +58,17 @@ por texto: `"texto em português": "texto em inglês"`.
   Ao incluir uma pessoa ou empreendimento novo, acrescente o nome lá.
 - Os avisos legais em inglês precisam da mesma validação de Compliance que os textos em português.
 
+## Documentos oficiais (PDFs)
+
+Ficam em `site/docs/`, uma pasta por fundo (`MCMV`, `BRM FII 1`, `BRM Renda`…) e `Compliance` para a página
+de Governança. **Tudo o que está em `site/docs/` é público**, mesmo sem link no site.
+
+- **Fundos:** cada página tem uma tabela em "Documentos oficiais" (`<div class="doc-row" data-doc-type="…">`) com
+  data, tipo, nome e link. Os botões de filtro aparecem quando há mais de um tipo de documento.
+- **Governança:** os cards da seção "Documentos oficiais" apontam para `site/docs/Compliance/`.
+- **Para incluir um documento:** suba o PDF na pasta do fundo, copie uma linha `doc-row` existente e ajuste a
+  data, o tipo, o nome, o link e o tamanho. Nos links, espaços viram `%20`. Inclua a tradução do nome no `i18n-en.js`.
+
 ## Privacidade e cookies (LGPD)
 
 - **Aviso de cookies:** aparece na primeira visita, com "Aceitar todos", "Rejeitar opcionais" e
@@ -120,7 +131,7 @@ disponíveis no histórico do Git, se forem necessárias.
 
 ## Pendências de conteúdo
 
-- PDFs dos fundos e notícias ainda apontam para `#`.
+- Notícias ainda apontam para `#`.
 - Políticas: preencher CNPJ e encarregado (DPO) e validar os textos com o Jurídico/Compliance.
 - O formulário de contato não tem envio configurado (precisa de backend ou serviço de formulários).
 - Foto do Jardins do Cerrado (Atuação) e selos "Fundo: [a definir]" dos empreendimentos.

@@ -744,6 +744,21 @@ html:not(.motion) .tl-item--brm .tl-dot { background: var(--accent); }
   .cookie-dialog__actions { display: grid; grid-template-columns: 1fr; }
 }
 
+/* ---------- Documentos oficiais ---------- */
+
+.doc-filters button { cursor: pointer; font-family: inherit; transition: background-color .3s var(--ease), color .3s var(--ease); }
+.doc-filters button[aria-pressed="false"] { background: transparent; }
+.doc-filters button[aria-pressed="false"]:hover { background: var(--ice) !important; }
+.doc-row:last-child { border-bottom: 0 !important; }
+.doc-row a:hover { text-decoration: underline; text-underline-offset: 3px; opacity: 1; }
+@media (max-width: 760px) {
+  .page .doc-table [style*="grid-template-columns: 150px"] { grid-template-columns: minmax(0, 1fr) auto !important; gap: 6px 16px !important; }
+  .page .doc-table [style*="grid-template-columns: 150px"]:first-child { display: none !important; }
+  .doc-row > span:nth-child(2) { justify-self: end !important; }
+  .doc-row > span:nth-child(3) { grid-column: 1 / -1; }
+  .doc-row > a[style] { grid-column: 1 / -1; justify-self: start !important; }
+}
+
 /* ---------- Carrossel da Home ---------- */
 
 .hero-carousel { isolation: isolate; }
