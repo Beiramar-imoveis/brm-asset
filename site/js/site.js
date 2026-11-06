@@ -158,6 +158,25 @@
       onScroll();
     }
 
+    // Documentos oficiais: filtro por tipo nas páginas dos fundos
+    document.querySelectorAll('.doc-filters').forEach(function (group) {
+      var rows = group.parentElement.querySelectorAll('.doc-row');
+      var chips = group.querySelectorAll('[data-doc-filter]');
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          var type = chip.dataset.docFilter;
+          chips.forEach(function (c) {
+            var on = c === chip;
+            c.setAttribute('aria-pressed', String(on));
+            c.style.background = on ? '#00458C' : 'transparent';
+            c.style.color = on ? '#FFFFFF' : '#00458C';
+            c.style.border = on ? '0' : '1px solid #C8D6EE';
+          });
+          rows.forEach(function (r) { r.hidden = !!type && r.dataset.docType !== type; });
+        });
+      });
+    });
+
     // Carrossel de ativos da Home
     var carousel = document.querySelector('.hero-carousel');
     if (carousel) initCarousel(carousel);
@@ -263,7 +282,7 @@
     var selector = [
       '.page > section:not(.hero):not(.legal) h2',
       '.page > section:not(.hero):not(.legal) p',
-      '.page > section:not(.hero):not(.legal) [style*="display: grid"] > *',
+      '.page > section:not(.hero):not(.legal) [style*="display: grid"]:not(.doc-row):not(.doc-table > *) > *',
       '.page > section:not(.hero):not(.legal) span[style*="text-transform: uppercase"]',
       '.page > section:not(.hero):not(.legal) img:not(.section-bg)',
       '.page > footer [style*="display: grid"] > *',
