@@ -165,13 +165,7 @@
       chips.forEach(function (chip) {
         chip.addEventListener('click', function () {
           var type = chip.dataset.docFilter;
-          chips.forEach(function (c) {
-            var on = c === chip;
-            c.setAttribute('aria-pressed', String(on));
-            c.style.background = on ? '#00458C' : 'transparent';
-            c.style.color = on ? '#FFFFFF' : '#00458C';
-            c.style.border = on ? '0' : '1px solid #C8D6EE';
-          });
+          chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
           rows.forEach(function (r) { r.hidden = !!type && r.dataset.docType !== type; });
         });
       });
