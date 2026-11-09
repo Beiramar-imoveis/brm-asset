@@ -263,7 +263,7 @@
       var items = Array.prototype.slice.call(col.children);
       Array.prototype.forEach.call(col.parentElement.children, function (el) { if (el !== col) items.push(el); });
       Array.prototype.forEach.call(hero.children, function (el) {
-        if (el !== header && !el.contains(h1) && el.className !== 'header-spacer') items.push(el);
+        if (el !== header && !el.contains(h1) && el.className !== 'header-spacer' && !el.classList.contains('hero-bg')) items.push(el);
       });
       items.forEach(function (el, i) {
         el.classList.add('hero-item');
