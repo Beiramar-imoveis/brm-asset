@@ -721,5 +721,6 @@ window.BRM_I18N_EN = {
   "PDF · 145 KB": "PDF · 145 KB",
   // Redes sociais
   "Instagram da BRM Asset": "BRM Asset on Instagram",
-  "LinkedIn da BRM Asset": "BRM Asset on LinkedIn"
+  "LinkedIn da BRM Asset": "BRM Asset on LinkedIn",
+  "Conheça o Grupo Beiramar": "Discover Grupo Beiramar"
 };
