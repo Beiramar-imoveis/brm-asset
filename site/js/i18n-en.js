@@ -75,6 +75,8 @@ window.BRM_I18N_EN = {
   "Carrossel de ativos investidos pela BRM": "Carousel of assets invested by BRM",
   "Ativos investidos pela BRM": "Assets invested by BRM",
   "Ativos investidos ·": "Invested assets ·",
+  "Fundo: BRM FII": "Fund: BRM FII",
+  "Fundo:": "Fund:",
   "Ativo anterior": "Previous asset",
   "Próximo ativo": "Next asset",
   "Ver Casa Pedra": "View Casa Pedra",
