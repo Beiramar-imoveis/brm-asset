@@ -931,3 +931,48 @@ html:not(.motion) .tl-item--brm .tl-dot { background: var(--accent); }
 .social-links--light .group-link:hover { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
 .social-btn:hover { transform: translateY(-2px); }
 .social-btn:focus-visible, .group-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Rodapé: logo e redes no topo; endereços e colunas de links alinhados pelo topo */
+@media (min-width: 1201px) {
+  .page > footer[style] { height: auto !important; gap: 56px; }
+  .page footer > div:first-child[style] { row-gap: 20px !important; align-items: start; }
+  .page footer > div:first-child > div:first-child[style] { display: contents !important; }
+  .page footer > div:first-child > div:first-child > img { grid-column: 1 / span 2; grid-row: 1; justify-self: start; }
+  .page footer > div:first-child > div:first-child > span { grid-column: 1 / span 2; grid-row: 2; }
+  .page footer > div:first-child > div:first-child > div { grid-column: 1 / span 2; grid-row: 3; margin-top: 20px; padding-right: 8px; }
+  .page footer > div:first-child > div:nth-child(2) { grid-column: 3; grid-row: 3; margin-top: 20px; align-self: stretch;
+    border-left: 1px solid rgba(255, 255, 255, .14); padding-left: 40px; }
+  .page footer > div:first-child > div:nth-child(3) { grid-column: 4; grid-row: 3; margin-top: 20px; }
+  .page footer > div:first-child > div:nth-child(4) { grid-column: 5; grid-row: 3; margin-top: 20px; }
+  .page footer .footer-social { grid-column: 3 / -1; grid-row: 1 / span 2; align-self: start; justify-self: end; justify-content: flex-end; }
+}
+@media (max-width: 1200px) { .page footer .footer-social { grid-column: 1 / -1; justify-self: end; } }
+@media (max-width: 760px) { .page footer .footer-social { justify-self: start; justify-content: flex-start; } }
+
+/* Contato: botões ocupam toda a largura do card de endereços */
+.social-links--light { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr); gap: 12px; }
+.social-links--light .social-btn { width: auto; }
+.social-links--light .group-link { justify-content: center; margin-left: 0; }
+
+/* Sobre: CTA para o site do Grupo Beiramar, abaixo do texto de apoio */
+.btn-group-site {
+  align-self: flex-start; order: 2;
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 52px; padding: 0 24px; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .28); color: #FFFFFF;
+  font-size: 15px; font-weight: 600; white-space: nowrap;
+  transition: background-color .25s var(--ease), border-color .25s var(--ease);
+}
+.btn-group-site:hover { background: var(--accent); border-color: var(--accent); }
+.btn-group-site:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Sobre: título e bloco de apoio (texto + botão) com a mesma altura */
+@media (min-width: 761px) {
+  .page .sobre-hero-grid[style] { align-content: end; row-gap: 28px; }
+  .page .sobre-hero-main[style] { display: contents !important; }
+  .sobre-hero-main > span { grid-column: 1 / span 7; grid-row: 1; }
+  .sobre-hero-main > h1 { grid-column: 1 / span 7; grid-row: 2; }
+  .page .sobre-hero-side[style] { grid-column: 8 / span 5; grid-row: 2; align-self: stretch; justify-content: space-between; padding-bottom: 0 !important; gap: 24px !important; }
+  .sobre-hero-side > p { margin-top: 6px !important; font-size: 17px !important; line-height: 1.55 !important; }
+}
+
