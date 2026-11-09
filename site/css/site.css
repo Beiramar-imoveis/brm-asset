@@ -904,3 +904,30 @@ html:not(.motion) .tl-item--brm .tl-dot { background: var(--accent); }
   .slide-photo.is-active { transform: none; }
   .slide-dot.is-active span { background: var(--white); }
 }
+
+/* ---------- Redes sociais e Grupo Beiramar (rodapé e Contato) ---------- */
+.social-links { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.social-btn {
+  width: 40px; height: 40px; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px;
+  transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+}
+.group-link {
+  height: 40px; padding: 0 16px; margin-left: 6px;
+  display: inline-flex; align-items: center; gap: 8px;
+  border-radius: 999px; font-size: 14px; font-weight: 500; white-space: nowrap;
+  transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+.social-links--dark .social-btn,
+.social-links--dark .group-link { border: 1px solid rgba(255, 255, 255, .18); color: #FFFFFF; }
+.social-links--dark .social-btn:hover,
+.social-links--dark .group-link:hover { background: var(--accent); border-color: var(--accent); }
+.social-links--light .social-btn,
+.social-links--light .group-link { background: #FFFFFF; border: 1px solid #D6E0F0; color: #00458C; }
+.social-links--light .social-btn { width: 56px; height: 56px; border-radius: 14px; }
+.social-links--light .group-link { height: 56px; border-radius: 14px; padding: 0 20px; font-size: 15px; font-weight: 600; margin-left: 2px; }
+.social-links--light .social-btn:hover,
+.social-links--light .group-link:hover { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
+.social-btn:hover { transform: translateY(-2px); }
+.social-btn:focus-visible, .group-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

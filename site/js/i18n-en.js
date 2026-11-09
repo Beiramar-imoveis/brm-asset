@@ -718,5 +718,8 @@ window.BRM_I18N_EN = {
   "PDF · 1,0 MB": "PDF · 1.0 MB",
   "PDF · 1,5 MB": "PDF · 1.5 MB",
   "Aprovação das Políticas": "Approval of the Policies",
-  "PDF · 145 KB": "PDF · 145 KB"
+  "PDF · 145 KB": "PDF · 145 KB",
+  // Redes sociais
+  "Instagram da BRM Asset": "BRM Asset on Instagram",
+  "LinkedIn da BRM Asset": "BRM Asset on LinkedIn"
 };
