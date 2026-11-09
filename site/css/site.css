@@ -397,7 +397,7 @@ a:hover .card-photo { transform: scale(1.05); }
 
 /* ---------- Topo das páginas com foto de fundo ---------- */
 
-.hero-photo { position: relative; isolation: isolate; overflow: hidden; }
+.hero-photo { position: relative; overflow: hidden; }
 .hero-photo > :not(.hero-bg) { position: relative; z-index: 2; }
 .hero-bg {
   position: absolute;
@@ -825,7 +825,6 @@ html:not(.motion) .tl-item--brm .tl-dot { background: var(--accent); }
 
 /* ---------- Carrossel da Home ---------- */
 
-.hero-carousel { isolation: isolate; }
 .hero-carousel > :not(.slide-photo) { position: relative; z-index: 2; }
 .hero-carousel::after {
   content: "";
