@@ -86,8 +86,8 @@ de Governança. **Tudo o que está em `site/docs/` é público**, mesmo sem link
   Use `analytics` ou `marketing`. **Ao adicionar uma ferramenta, inclua-a na tabela da Política de Cookies**
   (`site/cookies.html`). Se usar o Google Consent Mode, o `cookies.js` já envia as atualizações de
   consentimento ao `gtag`.
-- **Dados a preencher nas políticas:** CNPJ da BRM Asset e nome e e-mail do encarregado (DPO), marcados
-  entre colchetes em `site/politica-de-privacidade.html` e `site/termos-de-uso.html`.
+- **Dado a preencher nas políticas:** nome e e-mail do encarregado (DPO), marcados entre colchetes em
+  `site/politica-de-privacidade.html`.
 
 ## Animações
 
@@ -132,7 +132,7 @@ disponíveis no histórico do Git, se forem necessárias.
 ## Pendências de conteúdo
 
 - Notícias ainda apontam para `#`.
-- Políticas: preencher CNPJ e encarregado (DPO) e validar os textos com o Jurídico/Compliance.
+- Políticas: preencher o encarregado (DPO) e validar os textos com o Jurídico/Compliance.
 - O formulário de contato não tem envio configurado (precisa de backend ou serviço de formulários).
 - Foto do Jardins do Cerrado (Atuação) e selos "Fundo: [a definir]" dos empreendimentos.
 - O design só tem versões desktop: a adaptação para tablet e celular foi feita no CSS.
