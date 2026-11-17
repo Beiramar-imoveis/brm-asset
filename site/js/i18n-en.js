@@ -68,7 +68,7 @@ window.BRM_I18N_EN = {
 
   // Home
   "Plataforma completa de investimentos imobiliários": "A complete real estate investment platform",
-  "Seu capital em imóveis que geram renda.": "Your capital in income-generating real estate.",
+  "Uma gestora focada em Real Estate.": "An asset manager focused on Real\u00a0Estate.",
   "Originamos, estruturamos e gerimos investimentos em Real Estate com o lastro operacional de 45 anos do Grupo Beiramar. Quatro teses complementares, com governança institucional e foco em mercados regionais.": "We originate, structure and manage real estate investments backed by Grupo Beiramar's 45-year operating track record. Four complementary strategies, with institutional governance and a focus on regional markets.",
   "Conheça os fundos": "Explore our funds",
   "Para incorporadores": "For developers",
