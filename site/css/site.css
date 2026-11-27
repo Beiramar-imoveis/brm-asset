@@ -980,9 +980,9 @@ html:not(.motion) .tl-item--brm .tl-dot { background: var(--accent); }
 /* ---------- Vídeo do YouTube nas páginas dos fundos ----------
    Nada é carregado do YouTube até o clique em reproduzir (capa local). */
 .video-embed { position: relative; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; background: #001320; isolation: isolate; box-shadow: 0 30px 60px -30px rgba(0, 19, 32, .45); }
-.video-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 25%; transition: transform .8s var(--ease-out); }
-.video-embed::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: rgba(0, 19, 32, .28); }
-.video-play { position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; justify-content: center; cursor: pointer; background: none; border: 0; color: #FFFFFF; }
+.video-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .8s var(--ease-out); }
+.video-embed::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: rgba(0, 19, 32, .18); }
+.video-play { position: absolute; inset: 0; z-index: 3; display: flex; align-items: flex-end; justify-content: flex-end; padding: 28px; cursor: pointer; background: none; border: 0; color: #FFFFFF; }
 .video-play svg { box-sizing: content-box; padding: 24px 22px 24px 26px; border-radius: 999px; background: var(--accent); box-shadow: 0 12px 30px -8px rgba(29, 99, 255, .7); transition: transform .3s var(--ease), background-color .3s var(--ease); }
 .video-play:hover svg, .video-play:focus-visible svg { transform: scale(1.08); background: #3B7BFF; }
 .video-embed:hover .video-poster { transform: scale(1.03); }
@@ -992,5 +992,6 @@ html:not(.motion) .tl-item--brm .tl-dot { background: var(--accent); }
 .video-yt-link { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: #1D63FF; }
 .video-yt-link:hover { text-decoration: underline; }
 @media (max-width: 760px) {
-  .video-play svg { padding: 16px 14px 16px 18px; width: 22px; height: 22px; }
+  .video-play { padding: 14px; }
+  .video-play svg { padding: 14px 12px 14px 16px; width: 20px; height: 20px; }
 }
