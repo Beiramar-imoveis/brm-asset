@@ -416,4 +416,23 @@
       });
     });
   }
+  // Vídeos do YouTube: a capa é local e o player (youtube-nocookie) só é
+  // carregado quando o visitante clica em reproduzir.
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.video-play');
+    if (!btn) return;
+    var box = btn.closest('.video-embed');
+    var id = box && box.dataset.youtube;
+    if (!id || !/^[\w-]{6,20}$/.test(id)) return;
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1' + (I18N.lang() === 'en' ? '&hl=en' : '&hl=pt-BR');
+    f.title = I18N.t(box.dataset.title || 'Vídeo');
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.allowFullscreen = true;
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    box.classList.add('is-playing');
+    box.appendChild(f);
+    btn.remove();
+    f.focus();
+  });
 })();

@@ -605,6 +605,7 @@ window.BRM_I18N_EN = {
   "10. Alterações desta política": "10. Changes to this policy",
   "Esta política pode ser atualizada para refletir mudanças no site, na regulação ou nas nossas práticas. A data da última atualização aparece no topo desta página.": "This policy may be updated to reflect changes to the website, regulation or our practices. The date of the last update is shown at the top of this page.",
   "Última atualização: 4 de novembro de 2026": "Last updated: November 4, 2026",
+  "Última atualização: 27 de novembro de 2026": "Last updated: November 27, 2026",
   "Nesta página": "On this page",
   "Documentos legais": "Legal documents",
   "Termos de Uso — BRM Asset": "Terms of Use — BRM Asset",
@@ -722,5 +723,20 @@ window.BRM_I18N_EN = {
   // Redes sociais
   "Instagram da BRM Asset": "BRM Asset on Instagram",
   "LinkedIn da BRM Asset": "BRM Asset on LinkedIn",
-  "Conheça o Grupo Beiramar": "Discover Grupo Beiramar"
+  "Conheça o Grupo Beiramar": "Discover Grupo Beiramar",
+  // Vídeos dos fundos (3T26)
+  "Relatório em vídeo · 3T26": "Video report · Q3 2026",
+  "Resultados do 3º trimestre de 2026.": "Third-quarter 2026 results.",
+  "Pedro Fernandes, CEO do Grupo Beiramar, comenta os resultados do BRM MCMV no terceiro trimestre de 2026.": "Pedro Fernandes, CEO of Grupo Beiramar, discusses BRM MCMV's results for the third quarter of 2026.",
+  "Pedro Fernandes, CEO do Grupo Beiramar, comenta os resultados do BRM Renda no terceiro trimestre de 2026.": "Pedro Fernandes, CEO of Grupo Beiramar, discusses BRM Renda's results for the third quarter of 2026.",
+  "Assistir no YouTube": "Watch on YouTube",
+  "BRM MCMV · 3T26": "BRM MCMV · Q3 2026",
+  "BRM Renda · 3T26": "BRM Renda · Q3 2026",
+  "Comentários de Pedro Fernandes": "Commentary by Pedro Fernandes",
+  "CEO do Grupo Beiramar": "CEO of Grupo Beiramar",
+  "Assistir ao relatório do BRM MCMV em vídeo": "Watch the BRM MCMV video report",
+  "Assistir ao relatório do BRM Renda em vídeo": "Watch the BRM Renda video report",
+  "BRM MCMV — Relatório do 3º trimestre de 2026": "BRM MCMV — Third-quarter 2026 report",
+  "BRM Renda — Relatório do 3º trimestre de 2026": "BRM Renda — Third-quarter 2026 report",
+  "Algumas páginas dos fundos têm vídeos hospedados no YouTube (Google), exibidos em modo de privacidade aprimorada. Nenhum conteúdo do YouTube é carregado antes de você clicar em reproduzir; a partir desse clique, o YouTube pode usar cookies e armazenamento próprios, conforme a política de privacidade do Google.": "Some fund pages feature videos hosted on YouTube (Google), shown in privacy-enhanced mode. No YouTube content is loaded until you press play; from that click on, YouTube may use its own cookies and storage, under Google's privacy policy."
 };
