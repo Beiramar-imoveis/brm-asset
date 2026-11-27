@@ -725,17 +725,10 @@ window.BRM_I18N_EN = {
   "Conheça o Grupo Beiramar": "Discover Grupo Beiramar",
   // Vídeos dos fundos (3T26)
   "Relatório em vídeo · 3T26": "Video report · Q3 2026",
-  "Resultados do 3º trimestre de 2026.": "Third-quarter 2026 results.",
   "Pedro Fernandes, CEO do Grupo Beiramar, comenta os resultados do BRM MCMV no terceiro trimestre de 2026.": "Pedro Fernandes, CEO of Grupo Beiramar, discusses BRM MCMV's results for the third quarter of 2026.",
-  "Pedro Fernandes, CEO do Grupo Beiramar, comenta os resultados do BRM Renda no terceiro trimestre de 2026.": "Pedro Fernandes, CEO of Grupo Beiramar, discusses BRM Renda's results for the third quarter of 2026.",
+  "Pedro Fernandes, CEO do Grupo Beiramar, comenta os resultados do BRM Multiestratégia no terceiro trimestre de 2026.": "Pedro Fernandes, CEO of Grupo Beiramar, discusses BRM Multiestratégia's results for the third quarter of 2026.",
   "Assistir no YouTube": "Watch on YouTube",
-  "BRM MCMV · 3T26": "BRM MCMV · Q3 2026",
-  "BRM Renda · 3T26": "BRM Renda · Q3 2026",
-  "Comentários de Pedro Fernandes": "Commentary by Pedro Fernandes",
-  "CEO do Grupo Beiramar": "CEO of Grupo Beiramar",
   "Assistir ao relatório do BRM MCMV em vídeo": "Watch the BRM MCMV video report",
-  "Assistir ao relatório do BRM Renda em vídeo": "Watch the BRM Renda video report",
-  "BRM MCMV — Relatório do 3º trimestre de 2026": "BRM MCMV — Third-quarter 2026 report",
-  "BRM Renda — Relatório do 3º trimestre de 2026": "BRM Renda — Third-quarter 2026 report",
+  "Assistir ao relatório do BRM Multiestratégia em vídeo": "Watch the BRM Multiestratégia video report",
   "Algumas páginas dos fundos têm vídeos hospedados no YouTube (Google), exibidos em modo de privacidade aprimorada. Nenhum conteúdo do YouTube é carregado antes de você clicar em reproduzir; a partir desse clique, o YouTube pode usar cookies e armazenamento próprios, conforme a política de privacidade do Google.": "Some fund pages feature videos hosted on YouTube (Google), shown in privacy-enhanced mode. No YouTube content is loaded until you press play; from that click on, YouTube may use its own cookies and storage, under Google's privacy policy."
 };
